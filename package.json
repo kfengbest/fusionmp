@@ -1,0 +1,23 @@
+{
+  "name": "fusionmp",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server/server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ernicek/fusionmp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ernicek/fusionmp/issues"
+  },
+  "homepage": "https://github.com/ernicek/fusionmp#readme",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
