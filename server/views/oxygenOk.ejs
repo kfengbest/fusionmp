@@ -1,0 +1,13 @@
+<script type="text/javascript">
+// <![CDATA[
+ if (window.opener) {
+   window.opener.Oxygen.loginOk();
+ } else {
+   try {
+     parent.Oxygen.loginOk();
+   } catch (e) {
+     window.top.Oxygen.loginOk();
+   }
+ }
+// ]]>
+</script>

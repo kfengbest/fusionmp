@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/ernicek/fusionmp#readme",
   "dependencies": {
-    "express": "^4.13.3"
+    "body-parser": "^1.13.3",
+    "ejs": "^2.3.3",
+    "express": "^4.13.3",
+    "express-partials": "^0.3.0",
+    "express-session": "^1.11.3"
   }
 }
