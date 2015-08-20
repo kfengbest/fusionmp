@@ -15,6 +15,15 @@ var UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  
+  userid: {
+    type: String,
+  },
+
+  userimage: {
+    type: String,
+  },
+
   salt: String
 });
 

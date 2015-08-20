@@ -62,6 +62,43 @@ module.exports = {
       });
   },
 
+  updateUser: function (req, res, next) {
+    var username  = req.session.username,
+        user_id  = req.session.user_id,
+        userImage = req.session.userImage,
+        create,
+        newUser;
+
+    var findOne = Q.nbind(User.findOne, User);
+
+    // check to see if user already exists
+    findOne({username: username})
+      .then(function(user) {
+        if (user) {
+
+          next();
+        } else {
+          // make a new user if not one
+          create = Q.nbind(User.create, User);
+          newUser = {
+            username: username,
+            password: password,
+            userid: user_id,
+            userimage: userImage
+          };
+          return create(newUser);
+        }
+      })
+      .then(function (user) {
+        // create token to send back for auth
+        var token = jwt.encode(user, 'secret');
+        res.json({token: token});
+      })
+      .fail(function (error) {
+        next(error);
+      });
+  },
+
   checkAuth: function (req, res, next) {
     // checking to see if the user is authenticated
     // grab the token in the header is any

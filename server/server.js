@@ -5,6 +5,9 @@ var partials = require('express-partials');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 
+var userController = require('./users/userController.js');
+
+
 var app = express();
 
 mongoose.connect('mongodb://fusion:fusion@ds031883.mongolab.com:31883/fusionmarketplace'); // connect to mongo database named shortly
@@ -33,7 +36,7 @@ function checkAuth(req, res, next){
     }
 }
 
-app.get('/ox_response', function(req, res){
+app.get('/ox_response', function(req, res, next){
     //console.log(JSON.stringify(req.query));
     if(req != null && req.query != null && req.query['openid.mode'] != null && req.query['openid.identity'] != null){
         // logged in
@@ -46,6 +49,11 @@ app.get('/ox_response', function(req, res){
             req.session.user_id = uid;
             req.session.userName = req.query['openid.alias3.value.alias1'];
             req.session.userImage = req.query['openid.alias3.value.alias2'];
+
+            // save to db
+            //userController.updateUser(req, res, next);
+
+
             console.log('Oxygen user: ' + req.session.userName + "(" + uid + ")");
             return res.render('oxygenOk');
         }
