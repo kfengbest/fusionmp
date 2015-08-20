@@ -27,9 +27,9 @@ App.prototype.initialize = function(){
 
    // TEMP
    // TODO ... check login immediate
-   // Oxygen.checkImmediate();
+   Oxygen.checkImmediate();
    setTimeout(function() {
-      self._onUserInfoArrived({ "userid": "123", "name": "Kamil Ignac", "avatar": "http://imc.ulximg.com/image/src/cover/1408934009_e593df5f275bf603715b3306d1cca4b5.jpg/b994a2997abd48fdd5c67359cb5373e0/1408934009_usher12_21.jpg" });
+      //self._onUserInfoArrived({ "userid": "123", "name": "Kamil Ignac", "avatar": "http://imc.ulximg.com/image/src/cover/1408934009_e593df5f275bf603715b3306d1cca4b5.jpg/b994a2997abd48fdd5c67359cb5373e0/1408934009_usher12_21.jpg" });
       self._showMyProjects();
    }, 5000);
    // TEMP
