@@ -1,5 +1,7 @@
 var morgan      = require('morgan'), // used for logging incoming request
     bodyParser  = require('body-parser'),
+    partials = require('express-partials'),
+    session = require('express-session'),
     helpers     = require('./helpers.js'); // our custom middleware
 
 
@@ -12,6 +14,10 @@ module.exports = function (app, express) {
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
   app.use(express.static(__dirname + '/../../client'));
+  app.set('views', __dirname + '/../views');
+  app.set('view engine', 'ejs');
+  app.use(partials());
+  app.use(session({ secret: 'nase_tajne_heslo', cookie: {}, resave: true, saveUninitialized: true }));
 
 
   app.use('/api/users', userRouter); // use user router for all user request

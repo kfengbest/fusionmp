@@ -1,9 +1,6 @@
 var express     = require('express');
 var mongoose    = require('mongoose');
 var express = require('express');
-var partials = require('express-partials');
-var session = require('express-session');
-var bodyParser = require('body-parser');
 
 var userController = require('./users/userController.js');
 
@@ -17,14 +14,6 @@ require('./config/middleware.js')(app, express);
 
 // export our app for testing and flexibility, required by index.js
 
-
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
-app.use(partials());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + '/../client'));
-app.use(session({ secret: 'nase_tajne_heslo', cookie: {}, resave: true, saveUninitialized: true }));
 
 //checking function - it just check the existence of the
 function checkAuth(req, res, next){
@@ -65,13 +54,12 @@ app.get('/ox_response', function(req, res, next){
     res.render('oxygenFail');
 });
 
-app.get('/login', function (req, res) {
-    return res.render('login');
+app.get('/fake1', function(req, res){
+    res.send({ok: true});
 });
 
-
-app.get('/', checkAuth, function(req, res) {
-    res.render('index', { 'userName': req.session.userName, 'userImage': req.session.userImage });
+app.get('/userinfo', function(req, res){
+    res.send({ 'name': req.session.userName, 'avatar': req.session.userImage, 'userid': req.session.user_id });
 });
 
 app.listen(8000);

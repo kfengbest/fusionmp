@@ -29,9 +29,28 @@ App.prototype.initialize = function(){
 
 /**
  * Handle Successful login event
- * @param {object} userData
+ *
  */
-App.prototype.onLoginSuccessful = function(userData){
+App.prototype.onLoginSuccessful = function(){
+   var self = this;
+   $.ajax({
+      url: '/userinfo',
+      type: 'GET',
+      contentType: 'application/json',
+      success: function (data) {
+         self.userInfoArrived(data);
+      },
+      error: function (data) {
+      }
+   });
+};
+
+/**
+ * Handle Successful download of userInfo
+ * @param userData
+ *
+ */
+App.prototype.userInfoArrived = function(userData){
    if(userData == null){
       console.error('User data is not defined');
       return;
@@ -42,7 +61,15 @@ App.prototype.onLoginSuccessful = function(userData){
    this._header.setUserInfo(this.userData.name, this.userData.avatar);
    this._header.showUserInfo();
    this._header.showAddProject();
-};
+}
+
+/**
+ * Handle Failed login event
+ *
+ */
+App.prototype.onLoginFailed = function() {
+
+}
 
 /**
  * Handle Successful logout event

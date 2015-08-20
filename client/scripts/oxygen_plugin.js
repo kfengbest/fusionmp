@@ -500,12 +500,11 @@ var Oxygen = this.Oxygen = (function() {
     toString: function() { return 'Oxygen'; },
     loginOk: function() {
       console.log('Oxygen login success');
-      window.location.replace('/');
+      g_app.onLoginSuccessful();
     },
     loginFail: function() {
       console.log('Oxygen login fail');
-      $('#loginWithOxygen').css('display', 'inline');
-      $('#checkingOxygen').css('display', 'none');
+      g_app.onLoginFailed();
     }
   };
 })();
