@@ -25,13 +25,18 @@ function checkAuth(req, res, next){
 
 app.get('/ox_response', function(req, res){
     //console.log(JSON.stringify(req.query));
-    if(req != null && req.query != null && req.query['openid.mode'] != null && req.query['openid.sig'] != null){
+    if(req != null && req.query != null && req.query['openid.mode'] != null && req.query['openid.identity'] != null){
         // logged in
         if(req.query['openid.mode'] === 'id_res'){ // setup_needed = is not loged in
-            req.session.user_id = req.query['openid.sig'];
+            var uid = req.query['openid.identity'];
+            var idx = uid.lastIndexOf('/');
+            if (idx > 0) {
+                uid = uid.substr(idx+1);
+            }
+            req.session.user_id = uid;
             req.session.userName = req.query['openid.alias3.value.alias1'];
             req.session.userImage = req.query['openid.alias3.value.alias2'];
-            console.log('Oxygen user: ' + req.session.userName + "(" + req.session.user_id + ")");
+            console.log('Oxygen user: ' + req.session.userName + "(" + uid + ")");
             return res.render('oxygenOk');
         }
     }
