@@ -40,14 +40,7 @@ module.exports = {
     console.log(newProject);
 
     var createProject = Q.nbind(Project.create, Project);
-    // var newProject = {
-    //   name : body.name,
-    //   description: body.description,
-    //   imgUrl:body.imgUrl,
-    //   owner: null,
-    //   budget: 0,
-    //   status: 'wip'
-    // };
+    
     createProject(newProject)
     .then(function (createdProject) {
         if (createdProject) {
