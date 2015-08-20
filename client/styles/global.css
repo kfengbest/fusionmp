@@ -1,0 +1,55 @@
+/*
+   REMOVE ALL GARBAGE FROM ALL NODE'S STYLES
+*/
+*{ border:0; margin:0; padding:0; outline:0; }
+
+/*
+   DEFAULT LINKS
+*/
+a{
+   font-family: 'Open Sans',monospace;
+   font-weight: normal;
+   font-style: normal;
+   color: #000000;
+   text-decoration: none;
+}
+a:hover{
+   text-decoration: underline;
+}
+
+/*
+   SELECTION
+*/
+::selection {
+   background: #000000;
+   color: #ffffff;
+}
+::-moz-selection {
+   background: #000000;
+   color: #ffffff;
+}
+
+/*
+   DISABLE SELECTION
+*/
+.notSelectable{
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   -o-user-select: none;
+   user-select: none;
+}
+
+
+
+/*
+   BODY
+*/
+body{
+   font-family: 'Open Sans',monospace;
+   font-weight: 300;
+   font-style: normal;
+   font-size: 12px;
+   color: #000000;
+   background-color: #ffffff;
+}

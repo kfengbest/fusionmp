@@ -1,0 +1,30 @@
+#projectsList{
+   padding: 75px 0 50px 0;
+}
+
+
+
+/*
+   PROJECT
+*/
+#projectsList .project{
+   position: relative;
+   width: 100%;
+   background: #eeeeee;
+   margin: 1px 0 0 0;
+   cursor: pointer;
+}
+
+#projectsList .project .image{
+   position: relative;
+   width: 100%;
+   height: 60px;
+   background-position: center center;
+   background-repeat: no-repeat;
+   background-size: cover;
+}
+
+#projectsList .project .name{
+   font-weight: 400;
+   font-size: 22px;
+}
