@@ -12,4 +12,7 @@ module.exports = function (app) {
     .get(projectsController.read)
     .post(projectsController.update);
 
+  app.route('/:projectId/designers')
+  	.post(projectsController.createDesigner);
+  	
 };

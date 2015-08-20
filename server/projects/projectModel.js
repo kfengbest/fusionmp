@@ -32,4 +32,15 @@ ProjectSchema.pre('save', function(next){
   next();
 });
 
+ProjectSchema.methods = {
+    addDesigner: function(user, fileUrl, cb) {
+        this.designers.splice(0, 0, {
+            fusionfile: fileUrl,
+            designer: null
+        });
+
+        this.save(cb);
+    }
+};    
+
 module.exports = mongoose.model('Project', ProjectSchema);
