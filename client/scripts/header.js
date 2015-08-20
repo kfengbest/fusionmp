@@ -155,13 +155,15 @@ Header.prototype.setUserInfo = function(name, avatarUrl){
 Header.prototype.checkLoginInImmediateMode = function(){
    this.showProgress();
 
-   setTimeout(function(){
-      g_app.onLoginSuccessful({
-         "id": "ernest",
-         "name": "Ernest Toth",
-         "avatar": "http://www.ironmanmag.com.au/images/editorial/Back-muscles-neveux.jpg"
-      });
-   }, 3000);
+   Oxygen.checkImmediate();
+
+   //setTimeout(function(){
+   //   g_app.onLoginSuccessful({
+   //      "id": "ernest",
+   //      "name": "Ernest Toth",
+   //      "avatar": "http://www.ironmanmag.com.au/images/editorial/Back-muscles-neveux.jpg"
+   //   });
+   //}, 3000);
 };
 
 /**
