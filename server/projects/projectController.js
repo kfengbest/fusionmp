@@ -12,7 +12,7 @@ module.exports = {
     findProject({_id:projectId})
       .then(function (project) {
         if (project) {
-          req.navProject = project;
+          req.project = project;
           next();
         } else {
           next(new Error('Project not added yet'));
@@ -36,19 +36,11 @@ module.exports = {
   },
 
   create: function (req, res, next) {
-    var body = req.body;
-    console.log(body);
+    var newProject = req.body;
+    console.log(newProject);
 
     var createProject = Q.nbind(Project.create, Project);
-    var newProject = {
-      name : body.name,
-      description: body.description,
-      imgUrl:body.imgUrl,
-      owner: null,
-      budget: 0,
-      status: 'wip',
-      designers:[{fusionfile:'fileurl1', designer: null}, {fusionfile:'fileurl2', designer: null}]
-    };
+    
     createProject(newProject)
     .then(function (createdProject) {
         if (createdProject) {
@@ -59,19 +51,10 @@ module.exports = {
         next(error);
       });
 
-    // var findUser = Q.nbind(User.findOne, User);
-    // findUser({username: "bb"})
-    //   .then(function (user) {
-    //     if (user) {
-
-
-    //     }
-    //   })
-
   },
 
   update: function(req, res, next){
-    var project = req.navProject;
+    var project = req.project;
     project = _.extend(project, req.body);
     project.save(function (err, project) {
       if (err) {
@@ -84,7 +67,22 @@ module.exports = {
   },
 
   read: function (req, res, next) {
-    res.json(req.navProject);
+    res.json(req.project);
+  },
+
+  createDesigner: function(req, res, next){
+    var project = req.project;
+    var user = req.user;
+    var fusionfile = req.body.fusionfile || "";
+
+    project.addDesigner(user, fusionfile, function(err){
+      if (err) {
+        next(err);
+      }else{
+        res.json(req.body);
+      }
+    });
+
   }  
 
 };
