@@ -7,8 +7,13 @@
 
    <!-- styles -->
    <link rel="stylesheet" href="styles/global.css">
-   <link rel="stylesheet" href="styles/header.css">
+   <link rel="stylesheet" href="styles/intro.css">
+   <link rel="stylesheet" href="styles/logo.css">
+   <link rel="stylesheet" href="styles/user_info.css">
    <link rel="stylesheet" href="styles/project_list.css">
+   <link rel="stylesheet" href="styles/project_detail.css">
+   <link rel="stylesheet" href="styles/create_project.css">
+   <link rel="stylesheet" href="styles/my_projects.css">
    <link rel="stylesheet" href="styles/popup.css">
    <link rel="stylesheet" href="styles/animations.css">
 
@@ -18,6 +23,7 @@
    <script type="text/javascript" src="scripts/popup.js"></script>
    <script type="text/javascript" src="scripts/header.js"></script>
    <script type="text/javascript" src="scripts/project_list.js"></script>
+   <script type="text/javascript" src="scripts/my_project_list.js"></script>
    <script type="text/javascript" src="scripts/popup_add_project.js"></script>
    <script type="text/javascript" src="scripts/popup_project_detail.js"></script>
    <script type="text/javascript" src="scripts/oxygen_plugin.js"></script>
@@ -28,6 +34,132 @@
    <title>DesignCrowd for Fusion</title>
 </head>
 <body>
+   <!-- intro -->
+   <div id="intro"></div>
+   <!-- end of into -->
 
+   <!-- logo intro -->
+   <div class="logo">
+      <div class="line notSelectable">
+         <div class="text">
+            <div class="bigTitle">DESIGNCROWD</div>
+            <div class="smallTitle">for Fusion</div>
+         </div>
+      </div>
+   </div>
+   <!-- end of logo -->
+
+   <!-- user info -->
+   <div id="userInfo" class="userMode notSelectable">
+      <div class="loginBtn">Login</div>
+      <div class="user">
+         <div class="name"></div>
+         <div class="avatar"></div>
+      </div>
+   </div>
+   <!-- end of user info -->
+
+   <!-- my projects -->
+   <div id="myProjects" class="notSelectable">
+      <div class="title">My Projects</div>
+      <div class="container"></div>
+   </div>
+   <!-- end of my projects -->
+
+   <!-- project list -->
+   <div id="projectList"></div>
+
+   <!-- project detail
+   <div id="projectDetail" class="popup">
+      <div class="darkMode logo">
+         <div class="line notSelectable">
+            <div class="text">
+               <div class="bigTitle">DESIGNCROWD</div>
+               <div class="smallTitle">for Fusion</div>
+            </div>
+         </div>
+      </div>
+
+      <div class="closeBtn"></div>
+
+      <div class="project notSelectable">
+         <div class="projectInfo">
+            <div class="name">Project Super Chair</div>
+            <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure...</div>
+         </div>
+
+         <div class="photo"></div>
+
+         <div class="projectDetail">
+            <div class="budget"><b>Budget:</b> $1000</div>
+            <div class="deadline"><b>Deadline:</b> 02/15/2025</div>
+            <div class="status roundBnt light">Accept</div>
+
+            <div class="designersList">
+               <div class="title">Designers list:</div>
+
+               <div class="designer notFinished">
+                  <div class="avatar"></div>
+                  <div class="name">Kamil Ignac</div>
+                  <div class="buttons">
+                     <div class="roundBnt ask light">Ask the question</div>
+                     <div class="roundBnt buy light">Buy</div>
+                     <div class="roundBnt open light">Open in Fusion</div>
+                  </div>
+               </div>
+               <div class="designer">
+                  <div class="avatar"></div>
+                  <div class="name">Kaven Feng</div>
+                  <div class="buttons">
+                     <div class="roundBnt ask light">Ask the question</div>
+                     <div class="roundBnt buy light">Buy</div>
+                     <div class="roundBnt open light">Open in Fusion</div>
+                  </div>
+               </div>
+               <div class="designer">
+                  <div class="avatar"></div>
+                  <div class="name">Ernest Toth</div>
+                  <div class="buttons">
+                     <div class="roundBnt ask light">Ask the question</div>
+                     <div class="roundBnt buy light">Buy</div>
+                     <div class="roundBnt open light">Open in Fusion</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- end of project detail -->
+
+   <!-- crate project
+   <div id="createProject" class="popup">
+      <div class="darkMode logo">
+         <div class="line notSelectable">
+            <div class="text">
+               <div class="bigTitle">DESIGNCROWD</div>
+               <div class="smallTitle">for Fusion</div>
+            </div>
+         </div>
+      </div>
+
+      <div class="closeBtn"></div>
+
+      <div class="project notSelectable">
+         <div class="projectInfo">
+            <div class="name"><input type="text" name="name" placeholder="Project Name"></div>
+            <div class="text"><textarea name="description" placeholder="Project Description"></textarea></div>
+         </div>
+
+         <div class="photo empty">
+            <div class="emptyPhotoTitle">Upload photo</div>
+         </div>
+
+         <div class="projectDetail">
+            <div class="budget"><input type="text" name="budget" placeholder="Budget"></div>
+            <div class="deadline"><input type="text" name="deadline" placeholder="Deadline Date"></div>
+         </div>
+      </div>
+   </div>
+   <!-- end of crate project -->
 </body>
 </html>

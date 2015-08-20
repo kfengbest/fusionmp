@@ -4,138 +4,90 @@
  */
 function ProjectList(){
    this._$ = null;
-   this._userId = null;
-   this._projectsHtmlNodes = {};
-   this._projects = null;
+
+   this._list = [];
 }
 
 /**
  * Initialize
  */
 ProjectList.prototype.initialize = function(){
-   this._construct();
+   this._$ = $('#projectList');
 };
 
 /**
- * Construct HTML DOM
- * @private
+ * Download list of projects
  */
-ProjectList.prototype._construct = function(){
-   this._$ = $('<div id="projectsList"></div>');
-
-   $('body').append(this._$)
-};
-
 ProjectList.prototype.downloadList = function(){
    // TEMP
    var data = [
       {
-         "id": "1",
-         "imageUrl": "http://www.chcaddoutsourcing.com/images/3d_solid_modeling_cad_solid_modeling_3d_solid_models_3d_cad_models.jpg",
-         "name": "Project Name1",
-         "budget": "$1000",
-         "date": "date1",
-         "owner": "ernest"
+         "_id": {
+            "$oid": "55d6204ee4b0ffba89aafd17"
+         },
+         "title": "Project Super Chair",
+         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure...",
+         "imgUrl": "images/sketch_01.jpg",
+         "budget": 1000,
+         "deadline": "02/12/2025",
+         "status": "wip"
       },
       {
-         "id": "2",
-         "imageUrl": "https://33463d8ba37cd0a930f1-eb07ed6f28ab61e35047cec42359baf1.ssl.cf5.rackcdn.com/ugc/entry/z30TbGpnQXWH1hQEPhRR_CAD%20Model%201.jpg",
-         "name": "Project Name2",
-         "budget": "$1010",
-         "date": "date2",
-         "owner": "noernest"
-      },
-      {
-         "id": "3",
-         "imageUrl": "http://blog.grabcad.com/wp-content/uploads/2011/09/Kubota-engine-d1105-model.jpg",
-         "name": "Project Name3",
-         "budget": "$1020",
-         "date": "date3",
-         "owner": "ernest"
+         "_id": {
+            "$oid": "55d6204ee4b0ffba89aafd17"
+         },
+         "title": "Project Super Chair",
+         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure...",
+         "imgUrl": "images/sketch_07.jpg",
+         "budget": 1200,
+         "deadline": "10/05/2020",
+         "status": "wip"
       }
    ];
-   this._projects = data;
 
-   this.renderProjects();
-   // TEMP
-};
-
-ProjectList.prototype.renderProjects = function(){
-   this._renderList(this._projects);
+   var self = this;
+   setTimeout(function() {
+      self._list = data;
+      self._renderList();
+   }, 1500);
 };
 
 /**
- * Render list of data
- * @param {Array} data
+ * Render list of projects
  * @private
  */
-ProjectList.prototype._renderList = function(data){
-   if(this._$ === null){
-      console.error('list HTML DOM is not defined');
-      return;
-   }
-
-   for(var i = 0; i < data.length; ++i){
-      var projectData = data[i];
-      if(projectData == null || projectData.id == null){
-         console.error('Can not render project in index ' + i);
-         continue;
-      }
-
-      // project is not exist
-      if(this._projectsHtmlNodes[projectData.id] == null){
-         var $project = this._constructProject(projectData);
-         this._$.append($project);
-      }
-      // project exists
-      else{
-         //
-      }
+ProjectList.prototype._renderList = function(){
+   for(var i = 0; i < this._list.length; ++i){
+      var projectData = this._list[i];
+      this._$.append(this._constructProject(projectData));
    }
 };
 
 /**
- * Construct HTML DOM for on project
- * @param {object} data
+ * Construct HTML DOM for one proejct
+ * @param {object} projectData
  * @returns {*|jQuery|HTMLElement}
  * @private
  */
-ProjectList.prototype._constructProject = function(data){
-   var $project = $('<div class="project"></div>');
+ProjectList.prototype._constructProject = function(projectData){
+   var $project = $('<div class="project notSelectable"></div>');
 
-   // image
-   var $image = $('<div class="image"></div>');
-   $image.css('backgroundImage', 'url("' + data.imageUrl + '")');
-   $project.append($image);
-
-   // name
-   var $name = $('<div class="name"></div>');
-   $name.html(data.name);
-   $project.append($name);
-
-   // budget
-   var $budget = $('<div class="budget"></div>');
-   $budget.html(data.budget);
-   $project.append($budget);
-
-   // date
-   var $date = $('<div class="date"></div>');
-   $date.html(data.date);
-   $project.append($date);
+   $project.append('<div class="projectInfo"><div class="name">' + projectData.title + '</div><div class="text">' + projectData.description + '</div></div>');
+   $project.append('<div class="photo" style="background-image: url(\'' + projectData.imgUrl + '\')"></div>');
+   $project.append('<div class="projectDetail"><div class="budget"><b>Budget:</b> $' + projectData.budget + '</div><div class="deadline"><b>Deadline:</b> ' + projectData.deadline + '</div><div class="status roundBnt dark">New</div></div>');
 
    var self = this;
-   $project.bind('click', function() { self._onClickOnProject(data); });
+   $project.bind('click', function() { self._onProjectClick(projectData) });
 
    return $project;
 };
 
 /**
  * Handle click on project
- * @param {string} projectId // TODO
+ * @param {object} projectData
  * @private
  */
-ProjectList.prototype._onClickOnProject = function(data){
-   var popup = new Popup_ProjectDetail();
-   popup.show(data);
+ProjectList.prototype._onProjectClick = function(projectData){
+   console.log('Click on project ', projectData);
 };
 
