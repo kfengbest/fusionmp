@@ -1,0 +1,15 @@
+var projectsController = require('./projectController.js');
+
+module.exports = function (app) {
+
+  app.param('projectId', projectsController.findProject);
+
+  app.route('/')
+    .get(projectsController.list)
+    .post(projectsController.create);
+
+  app.route('/:projectId')
+    .get(projectsController.read)
+    .post(projectsController.update);
+
+};

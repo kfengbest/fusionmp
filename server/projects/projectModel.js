@@ -1,0 +1,35 @@
+var mongoose = require('mongoose'),
+    crypto   = require('crypto');
+var Schema = mongoose.Schema;
+
+var ProjectSchema = new mongoose.Schema({
+ name: String,
+ description: String,
+ imgUrl: String,
+ budget: Number,
+ status: String,
+ enddate: Date,
+ designers: [{
+ 	fusionfile: String,
+ 	designer: {
+ 		type: Schema.ObjectId,
+ 		ref: 'users'
+ 	}
+ }],
+ owner: {
+    type: Schema.ObjectId,
+    ref: 'users'
+  }
+});
+
+var createSha = function(url) {
+  var shasum = crypto.createHash('sha1');
+  shasum.update(url);
+  return shasum.digest('hex').slice(0, 5);
+};
+
+ProjectSchema.pre('save', function(next){
+  next();
+});
+
+module.exports = mongoose.model('Project', ProjectSchema);
