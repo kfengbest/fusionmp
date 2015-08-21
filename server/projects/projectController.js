@@ -10,6 +10,27 @@ var filesMap = {
   "GuitarOk" : "xxxxx"
 };
 
+
+var search = function(condition, multiple) {
+  var defer = Q.defer();
+
+  var findProjects = multiple? Q.nbind(Project.find, Project) : Q.nbind(Project.findOne, Project);
+
+  findProjects(condition)
+    .then(function (projects) {
+      if (projects) {
+        defer.resolve(projects);
+      } else {
+        defer.reject({});
+      }
+    })
+    .fail(function (error) {
+      defer.reject({});
+    });
+
+  return defer.promise;
+};
+
 module.exports = {
   findProjectById: function (req, res, next, projectId) {
     var findProject = Q.nbind(Project.findOne, Project);
@@ -100,8 +121,8 @@ module.exports = {
       userid: req.session.user_id || "oxygenid",
       userimage: req.session.userImage || "xxx.jgp"
     };
-    var fusionfile = req.body.fusionfile || "";
-    var fusionopenlink = req.body.fusionopenlink || "";
+    var fusionfile = "";
+    var fusionopenlink = "";
     project.addDesigner(user, fusionfile, fusionopenlink, function(err){
       if (err) {
         next(err);
@@ -119,29 +140,37 @@ module.exports = {
 
   },
 
+
   fakeApprove: function(req, res, next) {
     console.log('Fake Approve: ' + req.query.name);
-    res.json({ok: true});
-  },
+    var fusionfile = req.query.name;
+    var fusionopenlink = filesMap[fusionfile];
+    var userid = req.query.userid;
 
-  search: function(condition, multiple) {
-    var defer = Q.defer();
+    var filter = {$and:[{"status":"wip"},{"designers.designer.userid":userid}]};
 
-    var findProjects = multiple? Q.nbind(Project.find, Project) : Q.nbind(Project.findOne, Project);
+    search(filter, false)
+      .then(function(project){
+        if (project.designers) {
+          _.each(project.designers, function(e){
+            if (e.designer.userid === userid) {
+              e.fusionfile = fusionfile;
+              e.fusionopenlink = filesMap[fusionfile];
+              project.status = "closed";
+            }
+          })          
+        };
 
-    findProjects(condition)
-      .then(function (projects) {
-        if (projects) {
-          defer.resolve(projects);
-        } else {
-          defer.reject({});
-        }
-      })
-      .fail(function (error) {
-        defer.reject({});
+        project.save(function (err, project) {
+          if (err) {
+            next(err);
+          } else {
+            res.json(project);
+          }
+        });
+
       });
 
-    return defer.promise;
   },
 
   getUserById: function(project, userid){
