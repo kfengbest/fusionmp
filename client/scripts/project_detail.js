@@ -39,7 +39,7 @@ Popup_ProjectDetail.prototype._construct = function(){
 
    var $project = $('<div class="project notSelectable"></div>');
 
-   $project.append('<div class="projectInfo"><div class="name"></div><div class="text"></div><div class="statusContainer"></div></div>');
+   $project.append('<div class="projectInfo"><div class="name"></div><div class="text"></div><div class="statusContainer"><span class="roundBnt light disabled"></span></div></div>');
 
    $project.append('<div class="photo"></div>');
 
@@ -84,6 +84,11 @@ Popup_ProjectDetail.prototype._showProjectData = function(){
    this._$.find('.projectInfo .name').html(this._projectData.title);
    this._$.find('.projectInfo .text').html(this._projectData.description);
 
+   var statusStr = 'New';
+   if(this._projectData.status === 'wip')        { statusStr = 'In Progress';}
+   else if(this._projectData.status === 'closed'){ statusStr = 'Closed';}
+   this._$.find('.projectInfo .statusContainer .roundBnt').html(statusStr);
+
    this._$.find('.photo').css('backgroundImage','url("' + this._projectData.imgUrl + '")');
 
    this._$.find('.projectDetail .budget span').html('$ ' + this._projectData.budget);
@@ -92,6 +97,10 @@ Popup_ProjectDetail.prototype._showProjectData = function(){
    // clean
    this._$.find('.projectDetail .roundBnt').remove();
    this._$.find('.projectDetail .designersList').html('');
+
+   if(this._projectData.status === 'closed'){
+      return;
+   }
 
    // I'm NOT logined-in
    if(g_userData == null){
