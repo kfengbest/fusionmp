@@ -19,7 +19,7 @@ MyProjectList.prototype.initialize = function(){
  */
 MyProjectList.prototype.renderList = function(){
    var data = this._filterMyProjects();
-   if(data == null || data.length === 0){
+   if(data == null){
       return;
    }
 
@@ -49,8 +49,12 @@ MyProjectList.prototype.renderList = function(){
  * @private
  */
 MyProjectList.prototype._filterMyProjects = function(){
-   var result = [];
+   if(g_userData == null){
+      return null;
+   }
 
+   var result = [];
+   
    for(var i = 0; i < g_projects.length; ++i){
       var projectData = g_projects[i];
 
