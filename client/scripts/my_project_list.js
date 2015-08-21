@@ -58,11 +58,16 @@ MyProjectList.prototype._filterMyProjects = function(){
    for(var i = 0; i < g_projects.length; ++i){
       var projectData = g_projects[i];
 
-      if(projectData == null || projectData.owner == null || projectData.owner.userid == null || projectData.owner.userid != g_userData.userid){
-         continue;
+      if(projectData != null && projectData.owner != null && projectData.owner.userid != null && projectData.owner.userid == g_userData.userid){
+         result.push(projectData);
       }
-
-      result.push(projectData);
+      else if(projectData != null && projectData.designers != null && projectData.designers.length > 0){
+         for(var j = 0; j < projectData.designers.length; ++j){
+            if(projectData.designers[j].designer != null && projectData.designers[j].designer.userid == g_userData.userid){
+               result.push(projectData);
+            }
+         }
+      }
    }
 
    return result;
