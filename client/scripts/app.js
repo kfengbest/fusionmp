@@ -149,6 +149,8 @@ App.prototype._onUserInfoArrived = function(userData){
    $userInfo.find('.user .name').html(g_userData.name);
    $userInfo.find('.user .avatar').css("backgroundImage",  'url("' + g_userData.avatar + '")');
    $userInfo.css('display', 'block');
+
+    Oxygen.hide();
 };
 
 /**
@@ -169,7 +171,7 @@ App.prototype._onUserInfoFailed = function(){
  * @private
  */
 App.prototype._onLoginClick = function(){
-   alert('TODO ... login');
+    Oxygen.setOptions({viewmode: 'iframe', viewmode_options: {width: 350, height: 356}}).show();
 };
 
 
