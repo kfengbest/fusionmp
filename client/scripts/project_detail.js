@@ -124,6 +124,8 @@ Popup_ProjectDetail.prototype._showProjectData = function(){
             $designer.append('<div class="buttons"><div class="roundBnt ask light">Ask the question</div><div class="roundBnt buy light">Buy</div><div class="roundBnt open light">Open in Fusion</div></div>');
 
             $designersList.append($designer);
+
+            this._connectOpenEvent( $designer.find('.roundBnt.open'), designerData.fusionopenlink);
          }
       }
 
@@ -157,6 +159,17 @@ Popup_ProjectDetail.prototype._showProjectData = function(){
 };
 
 /**
+ * Connect button to click event
+ * @param $btn
+ * @param link
+ * @private
+ */
+Popup_ProjectDetail.prototype._connectOpenEvent = function($btn, link){
+   var self = this;
+   $btn.bind('click', function() { self._onOpen(link); })
+};
+
+/**
  * Handle click on accept
  * @private
  */
@@ -168,10 +181,20 @@ Popup_ProjectDetail.prototype._onAccept = function(){
       contentType: 'application/json',
       success: function (data) {
          console.log('GET - /api/projects/'+ self._projectId + '/accept - success', data);
+         g_app.updateProjectData(data);
+         g_app.updateProjects();
          self._downloadProject();
       },
       error: function (error) {
          console.log('GET - /api/projects/'+ self._projectId + '/accept - error', error);
       }
    });
+};
+
+/**
+ * Handle click on open button
+ * @private
+ */
+Popup_ProjectDetail.prototype._onOpen = function(link){
+   window.open(link, '_blank');
 };

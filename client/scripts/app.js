@@ -143,6 +143,25 @@ App.prototype.onLoginSuccessful = function(){
 };
 
 /**
+ * Update data for one project
+ * @param data
+ */
+App.prototype.updateProjectData = function(data){
+   if(data == null || data._id == null){
+      return;
+   }
+
+   var projectId = data._id;
+
+   for(var i = 0; i < g_projects.length; ++i){
+      if(g_projects[i]._id === projectId){
+         g_projects[i] = data;
+         break;
+      }
+   }
+};
+
+/**
  * Handle Fail login event
  */
 App.prototype.onLoginFailed = function(){
