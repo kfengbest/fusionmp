@@ -46,16 +46,6 @@ app.get('/ox_response', function(req, res){
     res.render('oxygenFail');
 });
 
-app.get('/fakeapprove', function(req, res){
-    console.log('Fake Approve: ' + req.query.name);
-    res.send({ok: true});
-});
-
-app.get('/fakesubmit', function(req, res){
-    console.log('Fake Submit: ' + req.query.name);
-    res.send({ok: true});
-});
-
 app.get('/userinfo', function(req, res){
     res.send({ 'name': req.session.userName, 'avatar': req.session.userImage, 'userid': req.session.user_id });
 });

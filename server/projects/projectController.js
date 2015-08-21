@@ -83,6 +83,16 @@ module.exports = {
       }
     });
 
-  }  
+  },
+
+  fakeSubmit: function(req, res, next) {
+    console.log('Fake Submit: ' + req.query.name);
+    res.json({ok: true});
+  },
+
+  fakeApprove: function(req, res, next) {
+    console.log('Fake Approve: ' + req.query.name);
+    res.json({ok: true});
+  }
 
 };
