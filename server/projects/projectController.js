@@ -8,27 +8,27 @@ var User = require('../users/userModel.js');
 var filesMap = {
 
 "BBQGrillBest" : {
-  fusionfilepreview: "",
+  fusionfilepreview: "images/BBQGrillBest.png",
   fusionopenlink: "fusion360://userId=smoghe%40autodesk.com&permalinkId=https%3A%2F%2Fmyhub.autodesk360.com%2Fu05%2Fxdio%2Fpermalink%2FXD56a43QTfd62c1cd96839722df360bd3ec6&hubId=u05&documentName=BBQGrillBest"
 },
 
 "CymbalStandOK" : {
-  fusionfilepreview: "",  
+  fusionfilepreview: "images/CymbalStandOk.png",
   fusionopenlink: "fusion360://userId=smoghe%40autodesk.com&permalinkId=https%3A%2F%2Fmyhub.autodesk360.com%2Fu05%2Fxdio%2Fpermalink%2FXD56a43QTfd62c1cd9681cfe6fef7efa10fd&hubId=u05&documentName=CymbalStandOK"
 },
 
 "CymbalStandBest" : {
-  fusionfilepreview: "",    
+  fusionfilepreview: "images/CymbalStandBest.png",
   fusionopenlink: "fusion360://userId=smoghe%40autodesk.com&permalinkId=https%3A%2F%2Fmyhub.autodesk360.com%2Fu05%2Fxdio%2Fpermalink%2FXD56a43QTfd62c1cd9683e62c2131ff83a95&hubId=u05&documentName=CymbalStandBest"
 },
 
 "GuitarOk" : {
-  fusionfilepreview: "",    
+  fusionfilepreview: "images/GuitarOk.png",
   fusionopenlink: "fusion360://userId=smoghe%40autodesk.com&permalinkId=https%3A%2F%2Fmyhub.autodesk360.com%2Fu05%2Fxdio%2Fpermalink%2FXD56a43QTfd62c1cd9681f29793be870b823&hubId=u05&documentName=GuitarOk"
 },
 
 "GuitarBest" : {
-  fusionfilepreview: "", 
+  fusionfilepreview: "images/GuitarBest.png",
   fusionopenlink: "fusion360://userId=smoghe%40autodesk.com&permalinkId=https%3A%2F%2Fmyhub.autodesk360.com%2Fu05%2Fxdio%2Fpermalink%2FXD56a43QTfd62c1cd9685896f9888c1f7ea2&hubId=u05&documentName=GuitarBest"
 }
 
