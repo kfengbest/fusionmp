@@ -50,6 +50,11 @@ app.get('/ox_response', function(req, res, next){
     res.render('oxygenFail');
 });
 
+app.get('ox_refresh_response', function(req, res){
+    console.log('ox_refresh_response');
+   res.send('ok');
+});
+
 app.get('/userinfo', function(req, res){
     res.send({ 'name': req.session.userName, 'avatar': req.session.userImage, 'userid': req.session.user_id });
 });
