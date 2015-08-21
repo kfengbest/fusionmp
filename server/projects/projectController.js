@@ -75,7 +75,7 @@ module.exports = {
     console.log(req.session);
 
     var user = {
-      username: req.session.username || "kaven",
+      username: req.session.userName || "kaven",
       userid: req.session.user_id || "oxygenid",
       userimage: req.session.userImage || "xxx.jgp"
     };
@@ -117,7 +117,7 @@ module.exports = {
     var project = req.project;
 
     var user = {
-      username: req.session.username || "kaven",
+      username: req.session.userName || "kaven",
       userid: req.session.user_id || "oxygenid",
       userimage: req.session.userImage || "xxx.jgp"
     };
@@ -159,6 +159,10 @@ module.exports = {
           }
         });
 
+      })
+      .fail(function(){
+        //console.log('cant find project');
+        res.json({ok: false});
       });
   },
 
