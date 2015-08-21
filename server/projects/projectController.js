@@ -5,9 +5,13 @@ var _ = require("underscore");
 
 var User = require('../users/userModel.js');
 
+var filesMap = {
+  "GuitarBest": "fusion360//xxxx",
+  "GuitarOk" : "xxxxx"
+};
 
 module.exports = {
-  findProject: function (req, res, next, projectId) {
+  findProjectById: function (req, res, next, projectId) {
     var findProject = Q.nbind(Project.findOne, Project);
     findProject({_id:projectId})
       .then(function (project) {
@@ -22,6 +26,22 @@ module.exports = {
         next(error);
       });
   },
+
+  // findProjectsByUserId: function (req, res, next, userid) {
+  //   var findProject = Q.nbind(Project.find, Project);
+  //   findProject({userid:userid})
+  //     .then(function (project) {
+  //       if (project) {
+  //         req.project = project;
+  //         next();
+  //       } else {
+  //         next(new Error('Project not added yet'));
+  //       }
+  //     })
+  //     .fail(function (error) {
+  //       next(error);
+  //     });
+  // },
 
   list: function (req, res, next) {
   console.log(req.session);
