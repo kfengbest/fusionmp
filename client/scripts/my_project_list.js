@@ -34,7 +34,7 @@ MyProjectList.prototype.renderList = function(){
          var projectId = projectData._id;
          if(self._htmlNodesList[projectId] == null){
             var $p = self._constructProject(projectData);
-            self._displayNewProject($p, time);
+            self._displayNewProject($p, time, i);
             self._htmlNodesList[projectId] = $p;
 
             time += 200;
@@ -77,12 +77,26 @@ MyProjectList.prototype._filterMyProjects = function(){
  * Use animation to show new project
  * @param {HTMLElement} $p
  * @param {number} time
+ * @param {number} idx
  * @private
  */
-MyProjectList.prototype._displayNewProject = function($p, time){
+MyProjectList.prototype._displayNewProject = function($p, time, idx){
    var self = this;
+   var container = self._$.find('.container');
+
    setTimeout(function() {
-      self._$.find('.container').append($p);
+      if(idx === 0){
+         if(container.find('.project').length === 0){
+            container.append($p);
+         }
+         else{
+            container.prepend($p);
+         }
+      }
+      else{
+         $p.insertAfter(container.find('.project:eq(' + (idx - 1) + ')'));
+      }
+
       $p.animate({ 'opacity': 1 }, 350);
    }, time);
 };

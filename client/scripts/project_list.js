@@ -25,7 +25,7 @@ ProjectList.prototype.renderList = function(){
       var projectId = projectData._id;
       if(this._htmlNodesList[projectId] == null){
          var $p = this._constructProject(projectData);
-         this._displayNewProject($p, time);
+         this._displayNewProject($p, time, i);
          this._htmlNodesList[projectId] = $p;
 
          time += 200;
@@ -37,12 +37,23 @@ ProjectList.prototype.renderList = function(){
  * Use animation to show new project
  * @param {HTMLElement} $p
  * @param {number} time
+ * @param {number} idx
  * @private
  */
-ProjectList.prototype._displayNewProject = function($p, time){
+ProjectList.prototype._displayNewProject = function($p, time, idx){
    var self = this;
    setTimeout(function() {
-      self._$.append($p);
+      if(idx === 0){
+         if(self._$.find('.project').length === 0){
+            self._$.append($p);
+         }
+         else{
+            self._$.prepend($p);
+         }
+      }
+      else{
+         $p.insertAfter(self._$.find('.project:eq(' + (idx - 1) + ')'));
+      }
       $p.fadeIn(350);
    }, time);
 };
