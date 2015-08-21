@@ -122,6 +122,8 @@ Popup_ProjectDetail.prototype._showProjectData = function(){
             $designer.append('<div class="avatar" style="background-image: url(\"' + designerData.fusionfilepreview + '\")"></div>');
             $designer.append('<div class="name">' + designerData.designer.username + '</div>');
             $designer.append('<div class="buttons"><div class="roundBnt ask light">Ask the question</div><div class="roundBnt buy light">Buy</div><div class="roundBnt open light">Open in Fusion</div></div>');
+
+            $designersList.append($designer);
          }
       }
 
