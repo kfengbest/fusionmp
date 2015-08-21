@@ -16,10 +16,8 @@ var ProjectSchema = new mongoose.Schema({
  designers: [{
  	fusionfile: String,
   fusionopenlink: String,
-  status: {
-    type: String,
-    default: ''
-  },
+  fusionfilepreview: String,
+  status: String,
  	designer: {
     username: String,
     userid: String,

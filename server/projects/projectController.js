@@ -168,6 +168,8 @@ module.exports = {
     var fusionfilepreview = values["fusionfilepreview"];
     var userid = req.query.userid;
 
+    console.log("submit", fusionfile, fusionfilepreview, fusionopenlink);
+
     var filter = {$and:[{"status":"wip"},{"designers.designer.userid":userid}]};
 
     search(filter, true)
@@ -206,19 +208,16 @@ module.exports = {
   fakeApprove: function(req, res, next) {
     console.log('Fake Approve: ' + req.query.name);
     var fusionfile = req.query.name;
-    var fusionopenlink = filesMap[fusionfile];
-    var userid = req.query.userid;
 
-    var filter = {$and:[{"status":"wip"},{"designers.designer.userid":userid}]};
+    var filter = {$and:[{"status":"wip"},{"designers.fusionfile":fusionfile}]};
 
     search(filter, false)
       .then(function(project){
+        console.log(project.title);
         if (project.designers) {
           _.each(project.designers, function(e){
-            if (e.designer.userid === userid) {
-              e.fusionfile = fusionfile;
-              e.fusionopenlink = filesMap[fusionfile];
-              e.status = "approved",
+            if (e.fusionfile === fusionfile) {
+              e.status = "approved";
               project.status = "closed";
             }
           })          
