@@ -56,44 +56,6 @@ App.prototype._hideIntro = function(){
  * @private
  */
 App.prototype._downloadProjects = function(callback) {
-   /*
-    var data = [
-    {
-    "_id": {
-    "$oid": "55d6204ee4b0ffba89aafd17"
-    },
-    "title": "Project Super Chair",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure...",
-    "imgUrl": "images/sketch_01.jpg",
-    "budget": 1000,
-    "deadline": "02/12/2025",
-    "status": "wip"
-    },
-    {
-    "_id": {
-    "$oid": "55d6204ee4b0ffba89aafccd17"
-    },
-    "title": "Project Chair",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...",
-    "imgUrl": "images/sketch_06.jpg",
-    "budget": 1200,
-    "deadline": "10/05/2020",
-    "status": "done"
-    },
-    {
-    "_id": {
-    "$oid": "55d6204ee4b0ffba89aafd1dsd7"
-    },
-    "title": "Project Super Chair",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure...",
-    "imgUrl": "images/sketch_07.jpg",
-    "budget": 1200,
-    "deadline": "10/05/2020",
-    "status": "wip"
-    }
-    ];
-    */
-
    var self = this;
    $.ajax({
       url:         '/api/projects',

@@ -39,7 +39,7 @@ Popup_ProjectDetail.prototype._construct = function(){
 
    var $project = $('<div class="project notSelectable"></div>');
 
-   $project.append('<div class="projectInfo"><div class="name"></div><div class="text"></div></div>');
+   $project.append('<div class="projectInfo"><div class="name"></div><div class="text"></div><div class="statusContainer"></div></div>');
 
    $project.append('<div class="photo"></div>');
 
