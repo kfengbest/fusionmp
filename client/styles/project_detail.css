@@ -1,0 +1,151 @@
+#projectDetail{
+
+}
+
+/*
+   PROJECT
+*/
+#projectDetail .project{
+   position: relative;
+   width: 100%;
+   margin: 40px 0 0 0;
+   min-height: 260px;
+}
+#projectDetail .project:after{
+   position: relative;
+   content: "";
+   clear: both;
+   display: block;
+}
+
+#projectDetail .project .photo{
+   position: absolute;
+   display: inline-block;
+   top: 0;
+   left: 50%;
+   width: 33%;
+   max-width: 500px;
+   border-radius: 50%;
+   background-position: center center;
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-color: #000000;
+   -ms-transform: translateX(-50%);
+   -webkit-transform:translateX(-50%);
+   transform: translateX(-50%);
+}
+#projectDetail .project .photo:after{
+   position: relative;
+   display: block;
+   content: "";
+   padding-top: 100%;
+}
+
+#projectDetail .project .projectInfo{
+   display: inline-block;
+   color: #ffffff;
+   width: 33%;
+   padding-top: 47px;
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   box-sizing: border-box;
+   padding-right: 30px;
+   padding-left: 30px;
+   float: left;
+   text-align: right;
+}
+
+#projectDetail .project .projectInfo .name{
+   font-weight: 700;
+   font-size: 36px;
+   padding: 0 0 12px 0;
+}
+
+#projectDetail .project .projectInfo .text{
+   font-weight: 300;
+   font-size: 15px;
+   line-height: 26px;
+}
+
+#projectDetail .project .projectDetail{
+   display: inline-block;
+   width: 33%;
+   padding-top: 47px;
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   box-sizing: border-box;
+   padding-right: 30px;
+   padding-left: 30px;
+   float: right;
+   text-align: left;
+}
+
+#projectDetail .project .projectDetail .budget{
+   font-size: 36px;
+   font-weight: 300;
+   padding: 0 0 10px 0;
+}
+
+#projectDetail .project .projectDetail .budget b{ font-weight: 700; }
+
+#projectDetail .project .projectDetail .deadline{
+   font-size: 36px;
+   font-weight: 300;
+   padding: 0 0 15px 0;
+}
+
+#projectDetail .project .projectDetail .deadline b{ font-weight: 700; }
+
+#projectDetail .project .projectDetail .designersList{
+   margin: 55px 0 0 0;
+}
+
+#projectDetail .project .projectDetail .designersList .title{
+   font-weight: 700;
+   font-size: 36px;
+}
+
+#projectDetail .project .projectDetail .designersList .designer{
+   position: relative;
+   padding: 0 0 0 110px;
+   margin: 25px 0 0 20px;
+}
+#projectDetail .project .projectDetail .designersList .designer.notFinished{ }
+
+#projectDetail .project .projectDetail .designersList .designer .avatar{
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 80px;
+   height: 80px;
+   border-radius: 50%;
+   background-position: center center;
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-color: #2B2B2B;
+}
+#projectDetail .project .projectDetail .designersList .designer.notFinished .avatar{
+   border: #ffffff 2px solid;
+   background-color: transparent;
+}
+
+#projectDetail .project .projectDetail .designersList .designer .name{
+   font-size: 20px;
+   line-height: 35px;
+}
+
+#projectDetail .project .projectDetail .designersList .designer .buttons{
+   margin: 2px 0 0 0;
+}
+
+#projectDetail .project .projectDetail .designersList .designer .roundBnt{
+   font-size: 16px;
+   line-height: 36px;
+   border-radius: 18px;
+}
+#projectDetail .project .projectDetail .designersList .designer .roundBnt.ask{ display: none; }
+#projectDetail .project .projectDetail .designersList .designer .roundBnt.buy{ display: inline-block; }
+#projectDetail .project .projectDetail .designersList .designer .roundBnt.open{ display: inline-block; }
+#projectDetail .project .projectDetail .designersList .designer.notFinished .roundBnt.ask{ display: inline-block; }
+#projectDetail .project .projectDetail .designersList .designer.notFinished .roundBnt.buy{ display: none; }
+#projectDetail .project .projectDetail .designersList .designer.notFinished .roundBnt.open{ display: none; }

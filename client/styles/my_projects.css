@@ -1,0 +1,89 @@
+#myProjects{
+   position: relative;
+   width: 100%;
+   display: none;
+}
+
+#myProjects .title{
+   position: relative;
+   width: 100%;
+   padding: 0 0 5px 25px;
+   color: #383838;
+   font-size: 36px;
+}
+
+#myProjects .container{
+   width: 100%;
+   overflow-y: hidden;
+   background: #383838;
+   height: 250px;
+   white-space: nowrap
+}
+
+
+/*
+   PROJECT
+*/
+#myProjects .project{
+   position: relative;
+   width: 210px;
+   height: 250px;
+   display: inline-block;
+   margin-right: 40px;
+   cursor: pointer;
+}
+#myProjects .project.new{ margin-left: 40px }
+
+#myProjects .project .photo{
+   position: absolute;
+   left: 0;
+   top: 20px;
+   border-radius: 50%;
+   background-position: center center;
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-color: #2B2B2B;
+   width: 210px;
+   height: 210px;
+}
+#myProjects .project.new .photo{ border: #ffffff 2px solid; }
+#myProjects .project.new .photo:before{
+   position: absolute;
+   content: "";
+   top: 50%;
+   left: 50%;
+   width: 2px;
+   height: 100px;
+   background: #ffffff;
+   -ms-transform: translate(-50%, -50%);
+   -webkit-transform: translate(-50%, -50%);
+   transform: translate(-50%, -50%);
+}
+#myProjects .project.new .photo:after{
+   position: absolute;
+   content: "";
+   top: 50%;
+   left: 50%;
+   height: 2px;
+   width: 100px;
+   background: #ffffff;
+   -ms-transform: translate(-50%, -50%);
+   -webkit-transform: translate(-50%, -50%);
+   transform: translate(-50%, -50%);
+}
+#myProjects .project.new .photo{ border: #ffffff 2px solid; }
+
+#myProjects .project .name{
+   position: absolute;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background: #000000;
+   text-align: center;
+   overflow: hidden;
+   white-space: nowrap;
+   text-overflow: ellipsis;
+   font-size: 24px;
+   line-height: 40px;
+   color: #ffffff;
+}

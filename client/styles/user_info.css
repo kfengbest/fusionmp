@@ -1,0 +1,34 @@
+#userInfo{
+   position: absolute;
+   right: 25px;
+   top: 25px;
+   font-size: 24px;
+   font-weight: 300;
+   color: #000000;
+   text-align: right;
+   display: none;
+}
+
+#userInfo .loginBtn{
+   cursor: pointer;
+   display: none;
+}
+#userInfo.loginMode .loginBtn{ display: block }
+
+#userInfo .user{
+   display: none;
+}
+#userInfo.userMode .user{ display: block }
+
+#userInfo .user .name{
+}
+
+#userInfo .user .avatar{
+   border-radius: 50%;
+   width: 50px;
+   height: 50px;
+   margin: 10px 0 0 auto;
+   background-position: center center;
+   background-repeat: no-repeat;
+   background-size: cover;
+}

@@ -1,0 +1,168 @@
+#createProject{
+
+}
+
+/*
+   PROJECT
+*/
+#createProject .project{
+   position: relative;
+   width: 100%;
+   margin: 40px 0 0 0;
+   min-height: 260px;
+}
+#createProject .project:after{
+   position: relative;
+   content: "";
+   clear: both;
+   display: block;
+}
+
+#createProject .project input{
+   color: #ffffff;
+   background: transparent;
+   border: none;
+}
+#createProject .project input::selection                 { background: #ffffff; color: #000000;  }
+#createProject .project input::-moz-selection            { background: #ffffff; color: #000000; }
+#createProject .project input::-webkit-input-placeholder { color: #555555; }
+#createProject .project input:-moz-placeholder           { color: #555555; }
+#createProject .project input::-moz-placeholder          { color: #555555; }
+#createProject .project input:-ms-input-placeholder      { color: #555555; }
+
+#createProject .project textarea{
+   color: #ffffff;
+   background: transparent;
+   border: none;
+   resize: none;
+}
+#createProject .project textarea::selection                 { background: #ffffff; color: #000000;  }
+#createProject .project textarea::-moz-selection            { background: #ffffff; color: #000000; }
+#createProject .project textarea::-webkit-input-placeholder { color: #555555; }
+#createProject .project textarea:-moz-placeholder           { color: #555555; }
+#createProject .project textarea::-moz-placeholder          { color: #555555; }
+#createProject .project textarea:-ms-input-placeholder      { color: #555555; }
+
+#createProject .project .photo{
+   position: absolute;
+   display: inline-block;
+   top: 0;
+   left: 50%;
+   width: 33%;
+   max-width: 500px;
+   border-radius: 50%;
+   background-position: center center;
+   background-repeat: no-repeat;
+   background-size: cover;
+   -ms-transform: translateX(-50%);
+   -webkit-transform:translateX(-50%);
+   transform: translateX(-50%);
+}
+#createProject .project .photo:after{
+   position: relative;
+   display: block;
+   content: "";
+   padding-top: 100%;
+}
+#createProject .project .photo.empty{
+   background-color: #2B2B2B;
+   border: 2px #ffffff solid;
+   cursor: pointer;
+}
+
+#createProject .project .photo .emptyPhotoTitle{
+   position: absolute;
+   left: 0;
+   width: 100%;
+   top: 50%;
+   font-size: 36px;
+   text-align: center;
+   -ms-transform: translateY(-50%);
+   -webkit-transform: translateY(-50%);
+   transform: translateY(-50%);
+   display: none;
+}
+#createProject .project .photo.empty .emptyPhotoTitle{ display: block }
+
+#createProject .project .projectInfo{
+   display: inline-block;
+   color: #ffffff;
+   width: 33%;
+   padding-top: 47px;
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   box-sizing: border-box;
+   padding-right: 30px;
+   padding-left: 30px;
+   float: left;
+   text-align: right;
+}
+
+#createProject .project .projectInfo .name{
+   padding: 0 0 12px 0;
+}
+#createProject .project .projectInfo .name input{
+   font-weight: 700;
+   font-size: 36px;
+   text-align: right;
+   width: 100%;
+}
+
+#createProject .project .projectInfo .text{ }
+
+#createProject .project .projectInfo .text textarea{
+   font-weight: 300;
+   font-size: 15px;
+   line-height: 26px;
+   width: 100%;
+   height: 300px;
+   text-align: right;
+}
+
+#createProject .project .projectDetail{
+   display: inline-block;
+   width: 33%;
+   padding-top: 47px;
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   box-sizing: border-box;
+   padding-right: 30px;
+   padding-left: 30px;
+   float: right;
+   text-align: left;
+}
+
+#createProject .project .projectDetail .budget{
+   font-size: 36px;
+   font-weight: 300;
+   padding: 0 0 10px 0;
+}
+
+#createProject .project .projectDetail .budget input{
+   font-size: 36px;
+   font-weight: 300;
+   text-align: left;
+   width: 100%;
+}
+#createProject .project .projectDetail .budget input::-webkit-input-placeholder { font-weight: 700 }
+#createProject .project .projectDetail .budget input:-moz-placeholder           { font-weight: 700 }
+#createProject .project .projectDetail .budget input::-moz-placeholder          { font-weight: 700 }
+#createProject .project .projectDetail .budget input:-ms-input-placeholder      { font-weight: 700 }
+
+#createProject .project .projectDetail .deadline{
+   font-size: 36px;
+   font-weight: 300;
+   padding: 0 0 15px 0;
+}
+
+
+#createProject .project .projectDetail .deadline input{
+   font-size: 36px;
+   font-weight: 300;
+   text-align: left;
+   width: 100%;
+}
+#createProject .project .projectDetail .deadline input::-webkit-input-placeholder { font-weight: 700 }
+#createProject .project .projectDetail .deadline input:-moz-placeholder           { font-weight: 700 }
+#createProject .project .projectDetail .deadline input::-moz-placeholder          { font-weight: 700 }
+#createProject .project .projectDetail .deadline input:-ms-input-placeholder      { font-weight: 700 }

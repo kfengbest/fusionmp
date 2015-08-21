@@ -1,0 +1,137 @@
+.logo{
+   z-index: 90;
+   top: 0;
+}
+
+.logo .line{
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   width: 40px;
+   left: 50%;
+   -ms-transform: translateX(-50%);
+   -webkit-transform:translateX(-50%);
+   transform: translateX(-50%);
+}
+
+.logo .text{
+   position: absolute;
+   left: 0;
+   text-align: right;
+   height: 60px;
+   padding: 0 0 0 50px;
+   cursor: default;
+}
+
+.logo .text:before{
+   content: "";
+   position: absolute;
+   top: 0;
+   left: 0;
+   height: 10px;
+   width: 40px;
+}
+
+.logo .text:after{
+   content: "";
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   height: 10px;
+   width: 40px;
+}
+
+.logo .text .bigTitle{
+   text-align: right;
+   font-size: 36px;
+   font-weight: 700;
+   line-height: 36px;
+}
+
+.logo .text .smallTitle{
+   text-align: right;
+   font-size: 24px;
+   line-height: 24px;
+   font-weight: 300;
+}
+
+
+
+/*
+   INTO MODE
+*/
+.logo.introMode{
+   position: fixed;
+   height: 100%;
+   left: 0;
+   right: 0;
+}
+
+.logo.introMode .line{
+   background: #383838;
+}
+
+.logo.introMode .text{
+   color: #000000;
+   top: 50%;
+   -ms-transform: translateY(-50%);
+   -webkit-transform:translateY(-50%);
+   transform: translateY(-50%);
+}
+
+.logo.introMode .text:before{ background: #ffffff }
+.logo.introMode .text:after { background: #ffffff }
+
+
+
+/*
+   STANDARD MODE
+*/
+.logo.standardMode{
+   position: absolute;
+   height: 160px;
+   left: 0;
+   right: 0;
+}
+
+.logo.standardMode .line{
+   background: #383838;
+}
+
+.logo.standardMode .text{
+   color: #000000;
+   top: 100px;
+   -ms-transform: none;
+   -webkit-transform:none;
+   transform: none;
+}
+
+.logo.standardMode .text:before{ background: #ffffff }
+.logo.standardMode .text:after { background: #ffffff }
+
+
+
+/*
+   DARK MODE
+*/
+.logo.darkMode{
+   position: absolute;
+   height: 160px;
+   left: 0;
+   right: 0;
+}
+
+.logo.darkMode .line{
+   background: #ffffff;
+}
+
+.logo.darkMode .text{
+   color: #ffffff;
+   top: 100px;
+   -ms-transform: none;
+   -webkit-transform:none;
+   transform: none;
+}
+
+.logo.darkMode .text:before{ background: #383838 }
+.logo.darkMode .text:after { background: #383838 }

@@ -50,10 +50,6 @@ app.get('/ox_response', function(req, res, next){
     res.render('oxygenFail');
 });
 
-app.get('/fake1', function(req, res){
-    res.send({ok: true});
-});
-
 app.get('/userinfo', function(req, res){
     res.send({ 'name': req.session.userName, 'avatar': req.session.userImage, 'userid': req.session.user_id });
 });

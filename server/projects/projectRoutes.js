@@ -8,6 +8,12 @@ module.exports = function (app) {
     .get(projectsController.list)
     .post(projectsController.create);
 
+  app.route('/fakesubmit')
+      .get(projectsController.fakeSubmit);
+
+  app.route('/fakeapprove')
+      .get(projectsController.fakeApprove);
+
   app.route('/:projectId')
     .get(projectsController.read)
     .post(projectsController.update);
