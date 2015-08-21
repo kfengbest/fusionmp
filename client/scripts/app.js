@@ -45,9 +45,9 @@ App.prototype._hideIntro = function(){
       $logo.removeClass('introMode');
       $logo.addClass('standardMode');
       $('#intro').fadeOut('350');
-      self._downloadProjects();
-
-      setTimeout(function() { Oxygen.checkImmediate(); }, 1500);
+      self._downloadProjects(function() {
+         setTimeout(function() { Oxygen.checkImmediate(); }, 1500);
+      });
    });
 };
 
@@ -55,7 +55,7 @@ App.prototype._hideIntro = function(){
  * Download all projects
  * @private
  */
-App.prototype._downloadProjects = function() {
+App.prototype._downloadProjects = function(callback) {
    /*
     var data = [
     {
@@ -103,6 +103,9 @@ App.prototype._downloadProjects = function() {
          console.log('GET - /api/projects - success', data);
          g_projects = data;
          self.updateProjects();
+         if(callback != null){
+            callback.call(self);
+         }
       },
       error:function (error) {
          console.log('GET - /api/projects - error', error);
@@ -115,7 +118,9 @@ App.prototype._downloadProjects = function() {
  */
 App.prototype.updateProjects = function(){
    this._projectList.renderList();
-   this._myProjectList.renderList();
+   if(g_userData !== null){
+      this._myProjectList.renderList();
+   }
 };
 
 /**

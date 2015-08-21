@@ -18,60 +18,20 @@ MyProjectList.prototype.initialize = function(){
  * Render list of my projects
  */
 MyProjectList.prototype.renderList = function(){
-   // TODO
-   var data = [
-      {
-         "_id": {
-            "$oid": "55d6204ee4b0ffba89aafd171"
-         },
-         "title": "Headphones",
-         "imgUrl": "images/sketch_02.jpg"
-      },
-      {
-         "_id": {
-            "$oid": "55d6204ee4b0ffba89aafd172"
-         },
-         "title": "Super bike",
-         "imgUrl": "images/sketch_03.jpg"
-      },
-      {
-         "_id": {
-            "$oid": "55d6204ee4b0ffba89aafd173"
-         },
-         "title": "Helmet",
-         "imgUrl": "images/sketch_04.jpg"
-      },
-      {
-         "_id": {
-            "$oid": "55d6204ee4b0ffba89aafd174"
-         },
-         "title": "Who know",
-         "imgUrl": "images/sketch_05.png"
-      },
-      {
-         "_id": {
-            "$oid": "55d6204ee4b0ffba89aafd175"
-         },
-         "title": "Machine",
-         "imgUrl": "images/sketch_06.jpg"
-      }
-   ];
+   var data = this._filterMyProjects();
+   if(data == null || data.length === 0){
+      return;
+   }
+
+   data.unshift({ "_id": "new", "title": "Create Project", "imgUrl": "" });
 
    this._$.slideDown(350);
 
-   // new
    var time = 200;
-   if(this._htmlNodesList['new'] == null){
-      var $newProject = this._constructProject({ "_id": { "$oid": "new" }, "title": "Create Project", "imgUrl": "" });
-      this._displayNewProject($newProject, time);
-      time += 200;
-      this._htmlNodesList['new'] = $newProject;
-   }
-
    for(var i = 0; i < data.length; ++i){
       var projectData = data[i];
 
-      var projectId = projectData._id.$oid;
+      var projectId = projectData._id;
       if(this._htmlNodesList[projectId] == null){
          var $p = this._constructProject(projectData);
          this._displayNewProject($p, time);
@@ -80,6 +40,27 @@ MyProjectList.prototype.renderList = function(){
          time += 200;
       }
    }
+};
+
+/**
+ * Get list of projects for loginned user
+ * @returns {Array}
+ * @private
+ */
+MyProjectList.prototype._filterMyProjects = function(){
+   var result = [];
+
+   for(var i = 0; i < g_projects.length; ++i){
+      var projectData = g_projects[i];
+
+      if(projectData == null || projectData.owner == null || projectData.owner.userid == null || projectData.owner.userid != g_userData.userid){
+         continue;
+      }
+
+      result.push(projectData);
+   }
+
+   return result;
 };
 
 /**
@@ -104,7 +85,7 @@ MyProjectList.prototype._displayNewProject = function($p, time){
  */
 MyProjectList.prototype._constructProject = function(projectData){
    var $project = $('<div class="project"></div>');
-   if(projectData._id.$oid === 'new'){
+   if(projectData._id === 'new'){
       $project.addClass('new');
    }
 
@@ -125,10 +106,17 @@ MyProjectList.prototype._constructProject = function(projectData){
 MyProjectList.prototype._onProjectClick = function(projectData){
    console.log('Click on project ', projectData);
 
+   var popup = null;
+
    // new
-   if(projectData._id.$oid === 'new'){
-      var popup = new Popup_CreateProject();
+   if(projectData._id === 'new'){
+      popup = new Popup_CreateProject();
       popup.show();
+   }
+   // detail
+   else{
+      popup = new Popup_ProjectDetail();
+      popup.show(projectData._id);
    }
 };
 

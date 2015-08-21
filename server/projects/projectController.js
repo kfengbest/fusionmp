@@ -167,6 +167,10 @@ module.exports = {
           }
         });
 
+      })
+      .fail(function(){
+        //console.log('cant find project');
+        res.json({ok: false});
       });
   },
 
