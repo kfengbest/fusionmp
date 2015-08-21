@@ -5,7 +5,6 @@
 function Popup(){
    this._$ = null;
    this._$closeBtn = null;
-   this._$content = null;
 }
 
 /**
@@ -47,13 +46,12 @@ Popup.prototype.hide = function(){
  * @private
  */
 Popup.prototype._construct = function(){
-   this._$ = $('<div id="popup"></div>');
+   this._$ = $('<div class="popup"></div>');
 
-   this._$closeBtn = $(' <div class="close notSelectable"></div>');
+   this._$.append('<div class="darkMode logo"><div class="line notSelectable"><div class="text"><div class="bigTitle">MARKETPLACE</div><div class="smallTitle">for Fusion</div></div></div></div>');
+
+   this._$closeBtn = $(' <div class="closeBtn"></div>');
    this._$.append(this._$closeBtn);
-
-   this._$content = $(' <div class="popupContent"></div>');
-   this._$.append(this._$content);
 };
 
 /**

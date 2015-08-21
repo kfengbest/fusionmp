@@ -3,8 +3,6 @@
  * @constructor
  */
 function App(){
-   this._userData = null;
-
    this._projectList = new ProjectList();
    this._myProjectList = new MyProjectList();
 }
@@ -13,60 +11,92 @@ function App(){
  * Initialize
  */
 App.prototype.initialize = function(){
+   var self = this;
+
+   $('#userInfo .loginBtn').bind('click', function() { self._onLoginClick(); });
+
    this._projectList.initialize();
    this._myProjectList.initialize();
 
    this._showIntro();
 
-   // TEMP
-   var self = this;
-   setTimeout(function() {
-      self._showProjectsList();
-   }, 2000);
-   // TEMP
-
-   // TEMP
-   // TODO ... check login immediate
-   Oxygen.checkImmediate();
-   setTimeout(function() {
-      //self._onUserInfoArrived({ "userid": "123", "name": "Kamil Ignac", "avatar": "http://imc.ulximg.com/image/src/cover/1408934009_e593df5f275bf603715b3306d1cca4b5.jpg/b994a2997abd48fdd5c67359cb5373e0/1408934009_usher12_21.jpg" });
-      self._showMyProjects();
-   }, 5000);
-   // TEMP
+   setTimeout(function(){
+      self._hideIntro();
+   }, 1500);
 };
 
 /**
- * Show page intro
+ * Show intro
  * @private
  */
 App.prototype._showIntro = function(){
-   $('.logo').addClass('introMode');
-};
-
-/**
- * Show list of project
- * @private
- */
-App.prototype._showProjectsList = function(){
-   // TODO ... animation
-   // logo
    var $logo = $('.logo');
-   $logo.removeClass('introMode');
-   $logo.addClass('standardMode');
-
-   // intro
-   $('#intro').fadeOut('350');
-
-   // list
-   this._projectList.downloadList();
+   $logo.addClass('introMode');
 };
 
 /**
- * Show list of my projects
+ * Hide intro
  * @private
  */
-App.prototype._showMyProjects = function(){
-   this._myProjectList.downloadList();
+App.prototype._hideIntro = function(){
+   var self = this;
+   var $logo = $('.logo');
+   $logo.animate({ 'height': 160 }, 350, function() {
+      $logo.removeClass('introMode');
+      $logo.addClass('standardMode');
+      $('#intro').fadeOut('350');
+      self._downloadProjects();
+
+      setTimeout(function() { Oxygen.checkImmediate(); }, 1000);
+   });
+};
+
+/**
+ * Download all projects
+ * @private
+ */
+App.prototype._downloadProjects = function(){
+   var data = [
+      {
+         "_id": {
+            "$oid": "55d6204ee4b0ffba89aafd17"
+         },
+         "title": "Project Super Chair",
+         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure...",
+         "imgUrl": "images/sketch_01.jpg",
+         "budget": 1000,
+         "deadline": "02/12/2025",
+         "status": "wip"
+      },
+      {
+         "_id": {
+            "$oid": "55d6204ee4b0ffba89aafccd17"
+         },
+         "title": "Project Chair",
+         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...",
+         "imgUrl": "images/sketch_06.jpg",
+         "budget": 1200,
+         "deadline": "10/05/2020",
+         "status": "done"
+      },
+      {
+         "_id": {
+            "$oid": "55d6204ee4b0ffba89aafd1dsd7"
+         },
+         "title": "Project Super Chair",
+         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure...",
+         "imgUrl": "images/sketch_07.jpg",
+         "budget": 1200,
+         "deadline": "10/05/2020",
+         "status": "wip"
+      }
+   ];
+
+   var self = this;
+   setTimeout(function() {
+      g_projects = data;
+      self._projectList.renderList();
+   }, 500);
 };
 
 /**
@@ -80,10 +110,19 @@ App.prototype.onLoginSuccessful = function(){
       contentType: 'application/json',
       success: function (data) {
          self._onUserInfoArrived(data);
+         self._myProjectList.renderList();
       },
-      error: function (data) {
+      error: function (error) {
+         self._onUserInfoFailed();
       }
    });
+};
+
+/**
+ * Handle Fail login event
+ */
+App.prototype.onLoginFailed = function(){
+   this._onUserInfoFailed();
 };
 
 /**
@@ -97,22 +136,36 @@ App.prototype._onUserInfoArrived = function(userData){
       return;
    }
 
-   this._userData = userData;
+   g_userData = userData;
 
    var $userInfo = $('#userInfo');
-   $userInfo.find('.user .name').html(userData.name);
-   $userInfo.find('.user .avatar').css("backgroundImage",  'url("' + userData.avatar + '")');
+   $userInfo.removeClass('loginMode');
+   $userInfo.addClass('userMode');
+   $userInfo.find('.user .name').html(g_userData.name);
+   $userInfo.find('.user .avatar').css("backgroundImage",  'url("' + g_userData.avatar + '")');
    $userInfo.css('display', 'block');
 };
 
 /**
  * Handle Failed login event
- *
-
-App.prototype.onLoginFailed = function() {
-
-}
+ * @private
  */
+App.prototype._onUserInfoFailed = function(){
+   g_userData = null;
+
+   var $userInfo = $('#userInfo');
+   $userInfo.removeClass('userMode');
+   $userInfo.addClass('loginMode');
+   $userInfo.css('display', 'block');
+};
+
+/**
+ * Handle click on login button
+ * @private
+ */
+App.prototype._onLoginClick = function(){
+   alert('TODO ... login');
+};
 
 
 
@@ -121,6 +174,8 @@ App.prototype.onLoginFailed = function() {
  * @type {null}
  */
 var g_app = null;
+var g_userData = null;
+var g_projects = null;
 $(document).ready(function(){
    g_app = new App();
    g_app.initialize();
