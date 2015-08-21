@@ -13,6 +13,9 @@ var filesMap = {
 module.exports = {
   findProjectById: function (req, res, next, projectId) {
     var findProject = Q.nbind(Project.findOne, Project);
+
+    console.log("findProjectById", projectId);
+
     findProject({_id:projectId})
       .then(function (project) {
         if (project) {
@@ -26,22 +29,6 @@ module.exports = {
         next(error);
       });
   },
-
-  // findProjectsByUserId: function (req, res, next, userid) {
-  //   var findProject = Q.nbind(Project.find, Project);
-  //   findProject({userid:userid})
-  //     .then(function (project) {
-  //       if (project) {
-  //         req.project = project;
-  //         next();
-  //       } else {
-  //         next(new Error('Project not added yet'));
-  //       }
-  //     })
-  //     .fail(function (error) {
-  //       next(error);
-  //     });
-  // },
 
   list: function (req, res, next) {
   console.log(req.session);
@@ -100,11 +87,9 @@ module.exports = {
     res.json(req.project);
   },
 
-  createDesigner: function(req, res, next){
-
-    console.log(req.session);
-
+  acceptProject: function(req, res, next){
     var project = req.project;
+
     var user = {
       username: req.session.username || "kaven",
       userid: req.session.user_id || "oxygenid",
@@ -123,6 +108,9 @@ module.exports = {
   },
 
   fakeSubmit: function(req, res, next) {
+    var fusionfile = req.query.name;
+    var userid = req.query.userid;
+
     console.log('Fake Submit: ' + req.query.name);
     res.json({ok: true});
   },
