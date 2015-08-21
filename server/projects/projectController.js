@@ -138,6 +138,28 @@ module.exports = {
     var fusionopenlink = filesMap[fusionfile];
     var userid = req.query.userid;
 
+    var filter = {$and:[{"status":"wip"},{"designers.designer.userid":userid}]};
+
+    search(filter, false)
+      .then(function(project){
+        if (project.designers) {
+          _.each(project.designers, function(e){
+            if (e.designer.userid === userid) {
+              e.fusionfile = fusionfile;
+              e.fusionopenlink = filesMap[fusionfile];
+            }
+          })          
+        };
+
+        project.save(function (err, project) {
+          if (err) {
+            next(err);
+          } else {
+            res.json(project);
+          }
+        });
+
+      });
   },
 
 
