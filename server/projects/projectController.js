@@ -31,17 +31,22 @@ module.exports = {
   },
 
   list: function (req, res, next) {
-  console.log(req.session);
+    console.log(req.session);
 
-  var findAll = Q.nbind(Project.find, Project);
+    var cond = {};
+    if(req.query.userid){
+      cond["owner.userid"] = req.query.userid;
+    }
+    var findAll = Q.nbind(Project.find, Project);
 
-  findAll({})
-    .then(function (projects) {
-      res.json(projects);
-    })
-    .fail(function (error) {
-      next(error);
-    });
+    console.log("list",cond);
+    findAll(cond)
+      .then(function (projects) {
+        res.json(projects);
+      })
+      .fail(function (error) {
+        next(error);
+      });
   },
 
   create: function (req, res, next) {
@@ -109,15 +114,56 @@ module.exports = {
 
   fakeSubmit: function(req, res, next) {
     var fusionfile = req.query.name;
+    var fusionopenlink = filesMap[fusionfile];
     var userid = req.query.userid;
 
-    console.log('Fake Submit: ' + req.query.name);
-    res.json({ok: true});
   },
 
   fakeApprove: function(req, res, next) {
     console.log('Fake Approve: ' + req.query.name);
     res.json({ok: true});
-  }
+  },
+
+  search: function(condition, multiple) {
+    var defer = Q.defer();
+
+    var findProjects = multiple? Q.nbind(Project.find, Project) : Q.nbind(Project.findOne, Project);
+
+    findProjects(condition)
+      .then(function (projects) {
+        if (projects) {
+          defer.resolve(projects);
+        } else {
+          defer.reject({});
+        }
+      })
+      .fail(function (error) {
+        defer.reject({});
+      });
+
+    return defer.promise;
+  },
+
+  getUserById: function(project, userid){
+
+    var defer = Q.defer();
+    if (project.owner && project.owner.userid === userid) {
+      defer.resolve(project.owner);
+    }else{
+      if (project.designers) {
+        var bs = _.find(project.designers, function(e){
+          return (e.designer && e.designer.userid === userid) ? true : false;
+        });
+
+        if (bs){
+          defer.resolve(bs.designer);
+        }else{
+          defer.reject({});
+        }
+      }
+    }
+
+    return defer.promise;
+  }  
 
 };

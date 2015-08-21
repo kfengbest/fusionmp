@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
     crypto   = require('crypto');
 var Schema = mongoose.Schema;
+var _ = require("underscore");
 
 var ProjectSchema = new mongoose.Schema({
  title: String,
@@ -45,6 +46,8 @@ ProjectSchema.methods = {
 
         this.save(cb);
     }
+
+
 };    
 
 module.exports = mongoose.model('Project', ProjectSchema);
