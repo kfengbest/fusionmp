@@ -95,8 +95,16 @@ App.prototype._downloadProjects = function(){
    var self = this;
    setTimeout(function() {
       g_projects = data;
-      self._projectList.renderList();
+      self.updateProjects();
    }, 500);
+};
+
+/**
+ * Update all projects
+ */
+App.prototype.updateProjects = function(){
+   this._projectList.renderList();
+   this._myProjectList.renderList();
 };
 
 /**

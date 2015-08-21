@@ -86,7 +86,28 @@ Popup_CreateProject.prototype._onSubmit = function(){
    var budget      = this._$.find('input[name="budget"]').val();
    var deadline    = this._$.find('input[name="deadline"]').val();
 
-
+   var self = this;
+   $.ajax({
+      url: '/api/projects',
+      type: 'POST',
+      data: JSON.stringify({
+         "title": name,
+         "description": description,
+         "budget": parseInt(budget),
+         "deadline": deadline,
+         "imgUrl": self._$uploadImg
+      }),
+      contentType: 'application/json',
+      success: function(data){
+         console.log('POST - /api/projects - success: ', data);
+         g_projects.unshift(data);
+         self.hide();
+         g_app.updateProjects();
+      },
+      error: function(error){
+         console.log('POST - /api/projects - error: ', error);
+      }
+   });
 };
 
 /**
@@ -111,7 +132,6 @@ Popup_CreateProject.prototype._onPhotoChange = function(e){
    var reader = new FileReader();
    reader.onload = (function(theFile) {
       return function(e) {
-         //theFile.name
          self._$uploadImg = e.target.result;
          self._$uploadBtn.removeClass('empty');
          self._$uploadBtn.css('backgroundImage', 'url(' + self._$uploadImg + ')');
