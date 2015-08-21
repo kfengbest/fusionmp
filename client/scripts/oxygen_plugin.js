@@ -8,7 +8,7 @@ var OXYGEN_OPTIONS = {
     height: 356,
     close_button: {
       size: 24,
-      image: 'resources/close_24.png'
+      image: 'images/close_24.png'
     }
   },
   provider: 'autodesk',
@@ -87,7 +87,7 @@ var OxygenOverlay = function(options) {
       });
       
       jQuery(container).css({
-        position: 'absolute',
+        position: 'fixed',
         top: 0,
         left: 0,
         zIndex: options.zIndex + 6,
@@ -159,8 +159,8 @@ var OxygenOverlay = function(options) {
         top: '50%',
         width: width,
         height: height,
-        marginTop: Math.max(-height / 2 - options.container.padding, (-jQuery(window).height() + 24) / 2) + jQuery(window).scrollTop(),
-        marginLeft: Math.max(-width / 2 - options.container.padding, (-jQuery(window).width() + 24) / 2)
+        marginTop: -(height/2),
+        marginLeft: -(width/2)
       }, {duration: 300, complete: fn.resizeOverlay});
       jQuery(content)[animate ? 'animate' : 'css']({
         width: width,
