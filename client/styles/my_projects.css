@@ -31,6 +31,7 @@
    display: inline-block;
    margin-right: 40px;
    cursor: pointer;
+   opacity: 0;
 }
 #myProjects .project.new{ margin-left: 40px }
 

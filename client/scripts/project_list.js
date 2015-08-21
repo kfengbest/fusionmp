@@ -4,8 +4,7 @@
  */
 function ProjectList(){
    this._$ = null;
-
-   this._list = [];
+   this._htmlNodesList = {};
 }
 
 /**
@@ -16,51 +15,36 @@ ProjectList.prototype.initialize = function(){
 };
 
 /**
- * Download list of projects
+ * Render list of projects
  */
-ProjectList.prototype.downloadList = function(){
-   // TEMP
-   var data = [
-      {
-         "_id": {
-            "$oid": "55d6204ee4b0ffba89aafd17"
-         },
-         "title": "Project Super Chair",
-         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure...",
-         "imgUrl": "images/sketch_01.jpg",
-         "budget": 1000,
-         "deadline": "02/12/2025",
-         "status": "wip"
-      },
-      {
-         "_id": {
-            "$oid": "55d6204ee4b0ffba89aafd17"
-         },
-         "title": "Project Super Chair",
-         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure...",
-         "imgUrl": "images/sketch_07.jpg",
-         "budget": 1200,
-         "deadline": "10/05/2020",
-         "status": "wip"
-      }
-   ];
+ProjectList.prototype.renderList = function(){
+   var time = 200;
+   for(var i = 0; i < g_projects.length; ++i){
+      var projectData = g_projects[i];
 
-   var self = this;
-   setTimeout(function() {
-      self._list = data;
-      self._renderList();
-   }, 1500);
+      var projectId = projectData._id.$oid;
+      if(this._htmlNodesList[projectId] == null){
+         var $p = this._constructProject(projectData);
+         this._displayNewProject($p, time);
+         this._htmlNodesList[projectId] = $p;
+
+         time += 200;
+      }
+   }
 };
 
 /**
- * Render list of projects
+ * Use animation to show new project
+ * @param {HTMLElement} $p
+ * @param {number} time
  * @private
  */
-ProjectList.prototype._renderList = function(){
-   for(var i = 0; i < this._list.length; ++i){
-      var projectData = this._list[i];
-      this._$.append(this._constructProject(projectData));
-   }
+ProjectList.prototype._displayNewProject = function($p, time){
+   var self = this;
+   setTimeout(function() {
+      self._$.append($p);
+      $p.fadeIn(350);
+   }, time);
 };
 
 /**
@@ -70,11 +54,19 @@ ProjectList.prototype._renderList = function(){
  * @private
  */
 ProjectList.prototype._constructProject = function(projectData){
+   var statusStr = 'New';
+   if(projectData.status === 'wip'){
+      statusStr = 'In Progress';
+   }
+   else if(projectData.status === 'done'){
+      statusStr = 'Closed';
+   }
+
    var $project = $('<div class="project notSelectable"></div>');
 
    $project.append('<div class="projectInfo"><div class="name">' + projectData.title + '</div><div class="text">' + projectData.description + '</div></div>');
    $project.append('<div class="photo" style="background-image: url(\'' + projectData.imgUrl + '\')"></div>');
-   $project.append('<div class="projectDetail"><div class="budget"><b>Budget:</b> $' + projectData.budget + '</div><div class="deadline"><b>Deadline:</b> ' + projectData.deadline + '</div><div class="status roundBnt dark">New</div></div>');
+   $project.append('<div class="projectDetail"><div class="budget"><b>Budget:</b> $' + projectData.budget + '</div><div class="deadline"><b>Deadline:</b> ' + projectData.deadline + '</div><div class="status roundBnt dark">' + statusStr + '</div></div>');
 
    var self = this;
    $project.bind('click', function() { self._onProjectClick(projectData) });
@@ -89,5 +81,8 @@ ProjectList.prototype._constructProject = function(projectData){
  */
 ProjectList.prototype._onProjectClick = function(projectData){
    console.log('Click on project ', projectData);
+
+   var popup = new Popup_ProjectDetail();
+   popup.show(projectData._id.$oid);
 };
 

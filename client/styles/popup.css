@@ -15,7 +15,6 @@
    animation: showDown 0.3s ease-out;
 }
 .popup.hide{
-   opacity: 0;
    -webkit-animation: hideUp 0.3s ease-out;
    animation: hideUp 0.3s ease-out;
 }
