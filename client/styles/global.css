@@ -78,6 +78,10 @@ body{
    color: #ffffff;
    background: #000000;
 }
+.roundBnt.light.disabled{
+   color: #ffffff;
+   border: #ffffff 2px solid;
+}
 .roundBnt.disabled{
    background: transparent;
    cursor: default;
