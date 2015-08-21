@@ -67,6 +67,10 @@
    line-height: 26px;
 }
 
+#projectDetail .project .projectInfo .statusContainer{
+   padding: 19px 0 0 0;
+}
+
 #projectDetail .project .projectDetail{
    display: inline-block;
    width: 33%;

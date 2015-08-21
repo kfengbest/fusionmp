@@ -58,7 +58,7 @@ ProjectList.prototype._constructProject = function(projectData){
    if(projectData.status === 'wip'){
       statusStr = 'In Progress';
    }
-   else if(projectData.status === 'done'){
+   else if(projectData.status === 'closed'){
       statusStr = 'Closed';
    }
 
