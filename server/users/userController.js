@@ -63,6 +63,9 @@ module.exports = {
   },
 
   updateUser: function (req, res, next) {
+
+    console.log("req.session", req.session);
+
     var username  = req.session.username,
         user_id  = req.session.user_id,
         userImage = req.session.userImage,
@@ -74,10 +77,12 @@ module.exports = {
     // check to see if user already exists
     findOne({username: username})
       .then(function(user) {
-        if (user) {
+        console.log("find user");
 
+        if (user) {
           next();
         } else {
+
           // make a new user if not one
           create = Q.nbind(User.create, User);
           newUser = {
@@ -86,6 +91,8 @@ module.exports = {
             userid: user_id,
             userimage: userImage
           };
+
+
           return create(newUser);
         }
       })

@@ -24,6 +24,8 @@ module.exports = {
   },
 
   list: function (req, res, next) {
+  console.log(req.session);
+
   var findAll = Q.nbind(Project.find, Project);
 
   findAll({})
@@ -37,7 +39,15 @@ module.exports = {
 
   create: function (req, res, next) {
     var newProject = req.body;
-    console.log(newProject);
+    console.log(req.session);
+
+    var user = {
+      username: req.session.username || "kaven",
+      userid: req.session.user_id || "oxygenid",
+      userimage: req.session.userImage || "xxx.jgp"
+    };
+
+    newProject.owner = user;
 
     var createProject = Q.nbind(Project.create, Project);
     
@@ -71,11 +81,18 @@ module.exports = {
   },
 
   createDesigner: function(req, res, next){
-    var project = req.project;
-    var user = req.user;
-    var fusionfile = req.body.fusionfile || "";
 
-    project.addDesigner(user, fusionfile, function(err){
+    console.log(req.session);
+
+    var project = req.project;
+    var user = {
+      username: req.session.username || "kaven",
+      userid: req.session.user_id || "oxygenid",
+      userimage: req.session.userImage || "xxx.jgp"
+    };
+    var fusionfile = req.body.fusionfile || "";
+    var fusionopenlink = req.body.fusionopenlink || "";
+    project.addDesigner(user, fusionfile, fusionopenlink, function(err){
       if (err) {
         next(err);
       }else{

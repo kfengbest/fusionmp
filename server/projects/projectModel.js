@@ -8,17 +8,20 @@ var ProjectSchema = new mongoose.Schema({
  imgUrl: String,
  budget: Number,
  status: String,
- enddate: Date,
+ deadline: Date,
  designers: [{
  	fusionfile: String,
+  fusionopenlink: String,
  	designer: {
- 		type: Schema.ObjectId,
- 		ref: 'users'
+    username: String,
+    userid: String,
+    userimage: String
  	}
  }],
  owner: {
-    type: Schema.ObjectId,
-    ref: 'users'
+    username: String,
+    userid: String,
+    userimage: String
   }
 });
 
@@ -33,10 +36,11 @@ ProjectSchema.pre('save', function(next){
 });
 
 ProjectSchema.methods = {
-    addDesigner: function(user, fileUrl, cb) {
+    addDesigner: function(user, fileUrl, openlink, cb) {
         this.designers.splice(0, 0, {
             fusionfile: fileUrl,
-            designer: null
+            fusionopenlink: openlink,
+            designer: user
         });
 
         this.save(cb);

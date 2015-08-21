@@ -39,10 +39,6 @@ app.get('/ox_response', function(req, res, next){
             req.session.userName = req.query['openid.alias3.value.alias1'];
             req.session.userImage = req.query['openid.alias3.value.alias2'];
 
-            // save to db
-            //userController.updateUser(req, res, next);
-
-
             console.log('Oxygen user: ' + req.session.userName + "(" + uid + ")");
             return res.render('oxygenOk');
         }
