@@ -46,7 +46,13 @@ app.get('/ox_response', function(req, res){
     res.render('oxygenFail');
 });
 
-app.get('/fake1', function(req, res){
+app.get('/fakeapprove', function(req, res){
+    console.log('Fake Approve: ' + req.query.name);
+    res.send({ok: true});
+});
+
+app.get('/fakesubmit', function(req, res){
+    console.log('Fake Submit: ' + req.query.name);
     res.send({ok: true});
 });
 
