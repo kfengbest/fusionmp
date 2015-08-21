@@ -46,7 +46,7 @@ App.prototype._hideIntro = function(){
       $logo.addClass('standardMode');
       $('#intro').fadeOut('350');
       self._downloadProjects(function() {
-         setTimeout(function() { Oxygen.checkImmediate(); }, 1500);
+         setTimeout(function() { Oxygen.checkImmediate(); }, 300);
       });
    });
 };
