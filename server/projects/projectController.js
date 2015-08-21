@@ -7,15 +7,30 @@ var User = require('../users/userModel.js');
 
 var filesMap = {
 
-"BBQGrillBest" : "fusion360://userId=smoghe%40autodesk.com&permalinkId=https%3A%2F%2Fmyhub.autodesk360.com%2Fu05%2Fxdio%2Fpermalink%2FXD56a43QTfd62c1cd96839722df360bd3ec6&hubId=u05&documentName=BBQGrillBest",
+"BBQGrillBest" : {
+  fusionfilepreview: "",
+  fusionopenlink: "fusion360://userId=smoghe%40autodesk.com&permalinkId=https%3A%2F%2Fmyhub.autodesk360.com%2Fu05%2Fxdio%2Fpermalink%2FXD56a43QTfd62c1cd96839722df360bd3ec6&hubId=u05&documentName=BBQGrillBest"
+},
 
-"CymbalStandOK" : "fusion360://userId=smoghe%40autodesk.com&permalinkId=https%3A%2F%2Fmyhub.autodesk360.com%2Fu05%2Fxdio%2Fpermalink%2FXD56a43QTfd62c1cd9681cfe6fef7efa10fd&hubId=u05&documentName=CymbalStandOK",
+"CymbalStandOK" : {
+  fusionfilepreview: "",  
+  fusionopenlink: "fusion360://userId=smoghe%40autodesk.com&permalinkId=https%3A%2F%2Fmyhub.autodesk360.com%2Fu05%2Fxdio%2Fpermalink%2FXD56a43QTfd62c1cd9681cfe6fef7efa10fd&hubId=u05&documentName=CymbalStandOK"
+},
 
-"CymbalStandBest" : "fusion360://userId=smoghe%40autodesk.com&permalinkId=https%3A%2F%2Fmyhub.autodesk360.com%2Fu05%2Fxdio%2Fpermalink%2FXD56a43QTfd62c1cd9683e62c2131ff83a95&hubId=u05&documentName=CymbalStandBest",
+"CymbalStandBest" : {
+  fusionfilepreview: "",    
+  fusionopenlink: "fusion360://userId=smoghe%40autodesk.com&permalinkId=https%3A%2F%2Fmyhub.autodesk360.com%2Fu05%2Fxdio%2Fpermalink%2FXD56a43QTfd62c1cd9683e62c2131ff83a95&hubId=u05&documentName=CymbalStandBest"
+},
 
-"GuitarOk" : "fusion360://userId=smoghe%40autodesk.com&permalinkId=https%3A%2F%2Fmyhub.autodesk360.com%2Fu05%2Fxdio%2Fpermalink%2FXD56a43QTfd62c1cd9681f29793be870b823&hubId=u05&documentName=GuitarOk",
+"GuitarOk" : {
+  fusionfilepreview: "",    
+  fusionopenlink: "fusion360://userId=smoghe%40autodesk.com&permalinkId=https%3A%2F%2Fmyhub.autodesk360.com%2Fu05%2Fxdio%2Fpermalink%2FXD56a43QTfd62c1cd9681f29793be870b823&hubId=u05&documentName=GuitarOk"
+},
 
-"GuitarBest" : "fusion360://userId=smoghe%40autodesk.com&permalinkId=https%3A%2F%2Fmyhub.autodesk360.com%2Fu05%2Fxdio%2Fpermalink%2FXD56a43QTfd62c1cd9685896f9888c1f7ea2&hubId=u05&documentName=GuitarBest"
+"GuitarBest" : {
+  fusionfilepreview: "", 
+  fusionopenlink: "fusion360://userId=smoghe%40autodesk.com&permalinkId=https%3A%2F%2Fmyhub.autodesk360.com%2Fu05%2Fxdio%2Fpermalink%2FXD56a43QTfd62c1cd9685896f9888c1f7ea2&hubId=u05&documentName=GuitarBest"
+}
 
 }
 
@@ -142,31 +157,46 @@ module.exports = {
   },
 
   fakeSubmit: function(req, res, next) {
+    console.log('fakeSubmit start');
     var fusionfile = req.query.name;
-    var fusionopenlink = filesMap[fusionfile];
+    var values = filesMap[fusionfile];
+    if (!values) {
+      res.json({ok: false});
+      return;
+    }
+    var fusionopenlink = values["fusionopenlink"];
+    var fusionfilepreview = values["fusionfilepreview"];
     var userid = req.query.userid;
+
+    console.log("submit", fusionfile, fusionfilepreview, fusionopenlink);
 
     var filter = {$and:[{"status":"wip"},{"designers.designer.userid":userid}]};
 
-    search(filter, false)
-      .then(function(project){
-        if (project.designers) {
-          _.each(project.designers, function(e){
-            if (e.designer.userid === userid) {
-              e.fusionfile = fusionfile;
-              e.fusionopenlink = filesMap[fusionfile];
+    search(filter, true)
+      .then(function(projects){
+        if (projects.length === 0) {
+          res.json({ok: false});
+          return;
+        }
+        _.each(projects, function(project){
+          if (project.designers) {
+            _.each(project.designers, function(e){
+              if (e.designer.userid === userid) {
+                e.fusionfile = fusionfile;
+                e.fusionopenlink = fusionopenlink;
+                e.fusionfilepreview = fusionfilepreview;
+              }
+            })          
+          };
+
+          project.save(function (err, project) {
+            if (err) {
+              next(err);
+            } else {
+              res.json(project);
             }
-          })          
-        };
-
-        project.save(function (err, project) {
-          if (err) {
-            next(err);
-          } else {
-            res.json(project);
-          }
+          });
         });
-
       })
       .fail(function(){
         //console.log('cant find project');
@@ -178,18 +208,16 @@ module.exports = {
   fakeApprove: function(req, res, next) {
     console.log('Fake Approve: ' + req.query.name);
     var fusionfile = req.query.name;
-    var fusionopenlink = filesMap[fusionfile];
-    var userid = req.query.userid;
 
-    var filter = {$and:[{"status":"wip"},{"designers.designer.userid":userid}]};
+    var filter = {$and:[{"status":"wip"},{"designers.fusionfile":fusionfile}]};
 
     search(filter, false)
       .then(function(project){
+        console.log(project.title);
         if (project.designers) {
           _.each(project.designers, function(e){
-            if (e.designer.userid === userid) {
-              e.fusionfile = fusionfile;
-              e.fusionopenlink = filesMap[fusionfile];
+            if (e.fusionfile === fusionfile) {
+              e.status = "approved";
               project.status = "closed";
             }
           })          

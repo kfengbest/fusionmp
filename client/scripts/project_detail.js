@@ -45,8 +45,6 @@ Popup_ProjectDetail.prototype._construct = function(){
 
    $project.append('<div class="projectDetail"><div class="budget"><b>Budget:</b> <span></span></div><div class="deadline"><b>Deadline:</b> <span></span></div></div>');
 
-   // TODO
-
    this._$.append($project);
 };
 
@@ -91,5 +89,112 @@ Popup_ProjectDetail.prototype._showProjectData = function(){
    this._$.find('.projectDetail .budget span').html('$ ' + this._projectData.budget);
    this._$.find('.projectDetail .deadline span').html(this._projectData.deadline);
 
-   // TODO
+   // clean
+   this._$.find('.projectDetail .roundBnt').remove();
+   this._$.find('.projectDetail .designersList').html('');
+
+   // I'm NOT logined-in
+   if(g_userData == null){
+      return;
+   }
+
+   var $container = this._$.find('.projectDetail');
+
+   // I'm owner
+   if(this._projectData.owner != null && this._projectData.owner.userid != null && this._projectData.owner.userid == g_userData.userid){
+      var $designersList = $('<div class="designersList"></div>');
+      $designersList.append('<div class="title">Designers list:</div>');
+
+      // list of designers is empty
+      if(this._projectData.designers != null && this._projectData.designers.length === 0){
+         $designersList.append('<div class="roundBnt light disabled">No designers yet</div>');
+      }
+      // there are same designers
+      else if(this._projectData.designers != null && this._projectData.designers.length > 0){
+         for(var i = 0; i < this._projectData.designers.length; ++i){
+            var designerData = this._projectData.designers[i];
+
+            var $designer = $('<div class="designer ">');
+            // not finished
+            if(designerData.fusionfile == null || designerData.fusionfile.length === 0){
+               $designer.addClass('notFinished');
+            }
+            $designer.append('<div class="avatar" style="background-image: url(\"' + designerData.fusionfilepreview + '\")"></div>');
+            $designer.append('<div class="name">' + designerData.designer.username + '</div>');
+            $designer.append('<div class="buttons"><div class="roundBnt ask light">Ask the question</div><div class="roundBnt buy light">Buy</div><div class="roundBnt open light">Open in Fusion</div></div>');
+
+            $designersList.append($designer);
+
+            this._connectOpenEvent( $designer.find('.roundBnt.open'), designerData.fusionopenlink);
+         }
+      }
+
+      $container.append($designersList);
+   }
+   // I'm designer
+   else{
+      var accepted = false;
+      if(this._projectData.designers != null){
+         for(var j = 0; j < this._projectData.designers.length; ++j){
+            if(this._projectData.designers[j].designer != null && this._projectData.designers[j].designer.userid != null && this._projectData.designers[j].designer.userid == g_userData.userid){
+               accepted = true;
+               break;
+            }
+         }
+      }
+
+      // I already accept it
+      if(accepted === true){
+         this._$.find('.projectDetail').append('<div class="roundBnt light disabled">Already accepted</div>');
+      }
+      // I can accept it
+      else{
+         this._$.find('.projectDetail').append('<div class="roundBnt light accept">Accept</div>');
+         var self = this;
+         this._$.find('.projectDetail .roundBnt.accept').bind('click', function() {
+            self._onAccept();
+         });
+      }
+   }
+};
+
+/**
+ * Connect button to click event
+ * @param $btn
+ * @param link
+ * @private
+ */
+Popup_ProjectDetail.prototype._connectOpenEvent = function($btn, link){
+   var self = this;
+   $btn.bind('click', function() { self._onOpen(link); })
+};
+
+/**
+ * Handle click on accept
+ * @private
+ */
+Popup_ProjectDetail.prototype._onAccept = function(){
+   var self = this;
+   $.ajax({
+      url: '/api/projects/' + self._projectId + '/accept',
+      type: 'POST',
+      contentType: 'application/json',
+      success: function (data) {
+         console.log('GET - /api/projects/'+ self._projectId + '/accept - success', data);
+         g_app.updateProjectData(data);
+         g_app.updateProjects();
+         self._downloadProject();
+      },
+      error: function (error) {
+         console.log('GET - /api/projects/'+ self._projectId + '/accept - error', error);
+      }
+   });
+};
+
+/**
+ * Handle click on open button
+ * @private
+ */
+Popup_ProjectDetail.prototype._onOpen = function(link){
+   window.open(link, '_blank');
 };

@@ -8,11 +8,16 @@ var ProjectSchema = new mongoose.Schema({
  description: String,
  imgUrl: String,
  budget: String,
- status: String,
+ status: {
+    type: String,
+    default: 'wip'
+ },
  deadline: String,
  designers: [{
  	fusionfile: String,
   fusionopenlink: String,
+  fusionfilepreview: String,
+  status: String,
  	designer: {
     username: String,
     userid: String,
