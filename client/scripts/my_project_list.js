@@ -54,7 +54,7 @@ MyProjectList.prototype._filterMyProjects = function(){
    }
 
    var result = [];
-   
+
    for(var i = 0; i < g_projects.length; ++i){
       var projectData = g_projects[i];
 
