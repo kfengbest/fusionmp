@@ -1,24 +1,26 @@
-#popup{
+.popup{
    position: fixed;
    top: 0;
    left: 0;
    width: 100%;
    height: 100%;
-   background: rgba(2, 2, 2, 1);
+   background: #383838;
    color: #ffffff;
    z-index: 100;
+   padding: 200px 0 100px 0;
+   overflow-x: hidden;
 }
-#popup.show{
+.popup.show{
    -webkit-animation: showDown 0.3s ease-out;
    animation: showDown 0.3s ease-out;
 }
-#popup.hide{
+.popup.hide{
    opacity: 0;
    -webkit-animation: hideUp 0.3s ease-out;
    animation: hideUp 0.3s ease-out;
 }
 
-#popup .close{
+.popup .closeBtn{
    position: absolute;
    top: 15px;
    right: 15px;
@@ -27,106 +29,5 @@
    cursor: pointer;
    background: url('../images/icon_close.svg') no-repeat center center;
    background-size: contain;
-}
-
-#popup .popupContent{
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   -ms-transform: translate(-50%, -50%);
-   -webkit-transform: translate(-50%, -50%);
-   transform: translate(-50%, -50%);
-}
-
-#popup .popupContent .row{
-   text-align: center;
-   margin-top: 35px;
-   margin-left: 10px;
-   margin-right: 10px;
-   margin-bottom: 35px;
-}
-#popup .popupContent .row.bigger{ margin-top: 70px; }
-
-#popup .popupContent .title{
-   font-size: 38px;
-   text-align: center;
-   cursor: default;
-   line-height: 46px;
-}
-
-#popup .popupContent .btn{
-   text-align: center;
-   border: #ffffff 1px solid;
-   font-size: 32px;
-   background: #000000;
-   padding: 0 25px 0 25px;
-   cursor: pointer;
-   display: inline-block;
-   line-height: 42px;
-}
-
-#popup .popupContent .btnLikeInput{
-   text-align: center;
-   border: #ffffff 1px solid;
-   font-size: 32px;
-   width: 400px;
-   cursor: pointer;
-   display: inline-block;
-   line-height: 42px;
-   color: #555555;
-}
-#popup .popupContent .btnLikeInput.upload{
-   background-repeat: no-repeat;
-   background-position: center center;
-   background-size: cover;
-}
-
-#popup .popupContent input{
-   font-family: 'Open Sans',monospace;
-   background: transparent;
-   font-size: 32px;
-   font-weight: 300;
-   color: #ffffff;
-   width: 400px;
-   line-height: 42px;
-   border-bottom: #ffffff 1px solid;
-   text-align: left;
-}
-#popup .popupContent input::selection                 { background: #ffffff; color: #000000;  }
-#popup .popupContent input::-moz-selection            { background: #ffffff; color: #000000; }
-#popup .popupContent input::-webkit-input-placeholder { color: #555555; }
-#popup .popupContent input:-moz-placeholder           { color: #555555; }
-#popup .popupContent input::-moz-placeholder          { color: #555555; }
-#popup .popupContent input:-ms-input-placeholder      { color: #555555; }
-
-#popup .popupContent textarea{
-   font-family: 'Open Sans',monospace;
-   background: transparent;
-   font-size: 32px;
-   font-weight: 300;
-   color: #ffffff;
-   width: 400px;
-   height: 50px;
-   line-height: 42px;
-   border-bottom: #ffffff 1px solid;
-   text-align: left;
-   resize: none;
-}
-
-
-
-/*
-   ADD PROJECT
-*/
-#popup.addProject{
-
-}
-
-
-
-/*
-   PROJECT DETAIL
-*/
-#popup.projectDetail{
-
+   z-index: 100;
 }
