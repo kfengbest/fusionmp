@@ -25,21 +25,22 @@ MyProjectList.prototype.renderList = function(){
 
    data.unshift({ "_id": "new", "title": "Create Project", "imgUrl": "" });
 
-   this._$.slideDown(350);
+   var self = this;
+   this._$.slideDown(350, function() {
+      var time = 200;
+      for(var i = 0; i < data.length; ++i){
+         var projectData = data[i];
 
-   var time = 200;
-   for(var i = 0; i < data.length; ++i){
-      var projectData = data[i];
+         var projectId = projectData._id;
+         if(self._htmlNodesList[projectId] == null){
+            var $p = self._constructProject(projectData);
+            self._displayNewProject($p, time);
+            self._htmlNodesList[projectId] = $p;
 
-      var projectId = projectData._id;
-      if(this._htmlNodesList[projectId] == null){
-         var $p = this._constructProject(projectData);
-         this._displayNewProject($p, time);
-         this._htmlNodesList[projectId] = $p;
-
-         time += 200;
+            time += 200;
+         }
       }
-   }
+   });
 };
 
 /**
