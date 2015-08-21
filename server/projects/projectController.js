@@ -135,7 +135,7 @@ module.exports = {
       if (err) {
         next(err);
       }else{
-        res.json(req.body);
+        res.json(project);
       }
     });
 
