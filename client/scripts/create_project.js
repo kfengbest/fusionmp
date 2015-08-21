@@ -93,7 +93,7 @@ Popup_CreateProject.prototype._onSubmit = function(){
       data: JSON.stringify({
          "title": name,
          "description": description,
-         "budget": parseInt(budget),
+         "budget": budget,
          "deadline": deadline,
          "imgUrl": self._$uploadImg
       }),

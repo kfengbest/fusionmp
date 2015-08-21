@@ -61,21 +61,21 @@ Popup_ProjectDetail.prototype._connectEvents = function(){
 };
 
 Popup_ProjectDetail.prototype._downloadProject = function(){
-   // TODO
-
    var self = this;
-   setTimeout(function() {
-      // find project
-      for(var i = 0; i < g_projects.length; ++i){
-         if(g_projects[i]._id.$oid === self._projectId){
-            self._projectData = g_projects[i];
-            break;
-         }
+   $.ajax({
+      url: '/api/projects/' + self._projectId,
+      type: 'GET',
+      contentType: 'application/json',
+      success: function (data) {
+         console.log('GET - /api/projects/'+ self._projectId + ' - success', data);
+         // TODO ... update g_projectList
+         self._projectData = data;
+         self._showProjectData();
+      },
+      error: function (error) {
+         console.log('GET - /api/projects/'+ self._projectId + ' - error', error);
       }
-
-      self._showProjectData();
-
-   }, 1000);
+   });
 };
 
 /**

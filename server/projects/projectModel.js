@@ -7,9 +7,9 @@ var ProjectSchema = new mongoose.Schema({
  title: String,
  description: String,
  imgUrl: String,
- budget: Number,
+ budget: String,
  status: String,
- deadline: Date,
+ deadline: String,
  designers: [{
  	fusionfile: String,
   fusionopenlink: String,

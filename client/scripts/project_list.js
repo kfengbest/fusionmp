@@ -22,7 +22,7 @@ ProjectList.prototype.renderList = function(){
    for(var i = 0; i < g_projects.length; ++i){
       var projectData = g_projects[i];
 
-      var projectId = projectData._id.$oid;
+      var projectId = projectData._id;
       if(this._htmlNodesList[projectId] == null){
          var $p = this._constructProject(projectData);
          this._displayNewProject($p, time);
@@ -83,6 +83,6 @@ ProjectList.prototype._onProjectClick = function(projectData){
    console.log('Click on project ', projectData);
 
    var popup = new Popup_ProjectDetail();
-   popup.show(projectData._id.$oid);
+   popup.show(projectData._id);
 };
 
