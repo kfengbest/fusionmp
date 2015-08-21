@@ -81,5 +81,8 @@ ProjectList.prototype._constructProject = function(projectData){
  */
 ProjectList.prototype._onProjectClick = function(projectData){
    console.log('Click on project ', projectData);
+
+   var popup = new Popup_ProjectDetail();
+   popup.show(projectData._id.$oid);
 };
 
