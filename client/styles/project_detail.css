@@ -100,15 +100,23 @@
    margin: 55px 0 0 0;
 }
 
+#projectDetail .project .projectDetail .designersList .roundBnt{
+   display: inline-block;
+   font-size: 16px;
+   line-height: 36px;
+   border-radius: 18px;
+}
+
 #projectDetail .project .projectDetail .designersList .title{
    font-weight: 700;
    font-size: 36px;
+   padding: 0 0 25px 0;
 }
 
 #projectDetail .project .projectDetail .designersList .designer{
    position: relative;
    padding: 0 0 0 110px;
-   margin: 25px 0 0 20px;
+   margin: 0 0 25px 20px;
 }
 #projectDetail .project .projectDetail .designersList .designer.notFinished{ }
 
@@ -138,11 +146,6 @@
    margin: 2px 0 0 0;
 }
 
-#projectDetail .project .projectDetail .designersList .designer .roundBnt{
-   font-size: 16px;
-   line-height: 36px;
-   border-radius: 18px;
-}
 #projectDetail .project .projectDetail .designersList .designer .roundBnt.ask{ display: none; }
 #projectDetail .project .projectDetail .designersList .designer .roundBnt.buy{ display: inline-block; }
 #projectDetail .project .projectDetail .designersList .designer .roundBnt.open{ display: inline-block; }
