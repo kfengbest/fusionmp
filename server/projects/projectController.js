@@ -81,16 +81,15 @@ module.exports = {
     if(req.query.userid){
       cond["owner.userid"] = req.query.userid;
     }
-    var findAll = Q.nbind(Project.find, Project);
 
-    console.log("list",cond);
-    findAll(cond)
-      .then(function (projects) {
+    Project.find(cond).sort([['_id', -1]]).exec(function(err, projects) { 
+      if (!err) {
         res.json(projects);
-      })
-      .fail(function (error) {
+      }else{
         next(error);
-      });
+      }
+    });
+
   },
 
   create: function (req, res, next) {
@@ -104,7 +103,7 @@ module.exports = {
     };
 
     newProject.owner = user;
-
+    //newProject.createAt = ;
     var createProject = Q.nbind(Project.create, Project);
     
     createProject(newProject)
