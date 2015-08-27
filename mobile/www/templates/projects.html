@@ -10,8 +10,8 @@
 
   <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="project in projects" type="item-text-wrap" href="#/projects/{{project.id}}">
-        <img ng-src="{{project.face}}">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="project in projects" type="item-text-wrap" href="#/projects/{{project._id}}">
+        <img ng-src="{{project.img}}">
         <h2>{{project.title}}</h2>
         <p>{{project.description}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>

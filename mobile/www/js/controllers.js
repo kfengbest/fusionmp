@@ -20,7 +20,9 @@ Projects.all().success(function(data){
 })
 
 .controller('ProjectDetailCtrl', function($scope, $stateParams, Projects) {
-  $scope.chat = Projects.get($stateParams.chatId);
+  Projects.get($stateParams.projectId).success(function(data){
+    $scope.project = data;
+  });
 })
 
 .controller('ProjectCreationController',['$scope','Projects','$state',function($scope,Projects,$state){

@@ -34,7 +34,7 @@ angular.module('starter.services', [])
 
     },
     get: function(projectId) {
-      return $http.get('http://10.148.228.83:8000/api/projects/'+projectId,{});
+      return $http.get('http://192.168.31.215:8000/api/projects/'+projectId,{});
     }
   };
 }]);
