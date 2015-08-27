@@ -10,6 +10,22 @@ module.exports = function (app, express) {
   var userRouter = express.Router();
   var projectRouter = express.Router();
   
+function allowCrossDomain(req, res, next) {
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Origin', "*");
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    //res.setHeader('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept");
+
+    if (req.method === 'OPTIONS') {
+        res.setHeader('Access-Control-Allow-Origin', "*");
+        res.setHeader('Access-Control-Allow-Credentials', true);
+        res.send(200);
+    } else {
+        next();
+    }
+}
+
+
   app.use(morgan('dev'));
   //app.use(bodyParser.urlencoded({extended: true}));
   //app.use(bodyParser.json());
@@ -20,6 +36,7 @@ module.exports = function (app, express) {
   app.use(bodyParser.urlencoded({extended: true, limit: '50mb'}));
   app.use(bodyParser.json({limit: '50mb'}));
   app.use(session({ secret: 'nase_tajne_heslo', cookie: {}, resave: true, saveUninitialized: true }));
+  app.use(allowCrossDomain);
 
 
   app.use('/api/users', userRouter); // use user router for all user request
@@ -30,6 +47,7 @@ module.exports = function (app, express) {
   app.use(helpers.errorHandler);
 
   app.use('/api/projects', projectRouter); 
+
 
   // inject our routers into their respective route files
   require('../users/userRoutes.js')(userRouter);
