@@ -1,0 +1,20 @@
+
+
+<ion-header-bar class="bar-positive">
+    <div class="buttons">
+        <button class="button button-icon icon ion-ios7-minus-outline" ng-click="data.showDelete = !data.showDelete;"></button>
+        <h1 class="title">projects</h1>
+        <button class="button" ui-sref="createProject">New</button>
+    </div>
+</ion-header-bar>
+
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="project in projects" type="item-text-wrap" href="#/projects/{{project.id}}">
+        <img ng-src="{{project.face}}">
+        <h2>{{project.title}}</h2>
+        <p>{{project.description}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>

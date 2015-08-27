@@ -1,15 +1,24 @@
 <ion-header-bar class="bar-positive">
     <div class="buttons">
-        <button class="button" ui-sref="todos">Back</button>
-        <h1 class="title">Create Todo</h1>
+        <button class="button" ui-sref="projects">Back</button>
+        <h1 class="title">Create project</h1>
     </div>
 </ion-header-bar>
 
 <ion-content>
     <div>
         <ion-list>
+            </br>
             <li class="item item-input item-stacked-label">
-                <textarea type="text" placeholder="Start typing..." name="content" rows="10" ng-model="todo.content" required></textarea>
+                <textarea type="text" placeholder="title..." name="title" rows="1" ng-model="project.title" required></textarea>
+            </li>
+            </br>
+            <li class="item item-input item-stacked-label">
+                <textarea type="text" placeholder="price..." name="title" rows="1" ng-model="project.price" required></textarea>
+            </li>
+            <br/>
+            <li class="item item-input item-stacked-label">
+                <textarea type="text" placeholder="description..." name="description" rows="10" ng-model="project.description" ></textarea>
             </li>
             <ion-button class="button button-block button-positive" ng-click="create()">
                 Add

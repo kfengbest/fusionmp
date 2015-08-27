@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('ChatsCtrl', function($scope, Chats) {
+.controller('ProjectsCtrl', function($scope, Projects) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -10,32 +10,26 @@ angular.module('starter.controllers', [])
   //});
 
 
-Chats.all().success(function(data){
-    $scope.chats = data;
+Projects.all().success(function(data){
+    $scope.projects = data;
   });
 
   $scope.remove = function(chat) {
-    Chats.remove(chat);
+    Projects.remove(chat);
   };
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+.controller('ProjectDetailCtrl', function($scope, $stateParams, Projects) {
+  $scope.chat = Projects.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-})
-
-.controller('ProjectCreationController',['$scope','Chats','$state',function($scope,Chats,$state){
+.controller('ProjectCreationController',['$scope','Projects','$state',function($scope,Projects,$state){
 
     $scope.project={};
 
     $scope.create=function(){
-        Todo.create({content:$scope.project.title}).success(function(data){
-            $state.go('tab.chats');
+        Projects.create($scope.project).success(function(data){
+            $state.go('projects');
         });
     }
 

@@ -1,10 +1,10 @@
 angular.module('starter.services', [])
 
-.factory('Chats', ['$http', function($http) {
+.factory('Projects', ['$http', function($http) {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
-  var chats = [{
+  var projects = [{
     id: 0,
     title: 'Ben Sparrow',
     description: 'You on your way?',
@@ -22,9 +22,15 @@ angular.module('starter.services', [])
     all: function() {
       return $http.get('http://192.168.31.215:8000/api/projects',{});
     },
-    create: function(chat) {
-      //chats.splice(chats.indexOf(chat), 1);
-      return $http.get('http://10.148.228.83:8000/api/projects',{});
+    create: function(project) {
+      
+      console.log('create project', project);
+
+      return $http.post('http://192.168.31.215:8000/api/projects',project, {
+          headers:{
+              'Content-Type':'application/json'
+          }
+      });
 
     },
     get: function(projectId) {
