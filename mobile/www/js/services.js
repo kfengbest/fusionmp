@@ -22,21 +22,13 @@ angular.module('starter.services', [])
     all: function() {
       return $http.get('http://192.168.31.215:8000/api/projects',{});
     },
-    remove: function(chat) {
+    create: function(chat) {
       //chats.splice(chats.indexOf(chat), 1);
       return $http.get('http://10.148.228.83:8000/api/projects',{});
 
     },
-    get: function(chatId) {
-      // for (var i = 0; i < chats.length; i++) {
-      //   if (chats[i].id === parseInt(chatId)) {
-      //     return chats[i];
-      //   }
-      // }
-      // return null;
-      return $http.get('http://10.148.228.83:8000/api/projects',{});
-
-
+    get: function(projectId) {
+      return $http.get('http://10.148.228.83:8000/api/projects/'+projectId,{});
     }
   };
 }]);

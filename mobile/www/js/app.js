@@ -67,6 +67,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         controller: 'AccountCtrl'
       }
     }
+  })
+
+  .state('createProject',{
+    url:'/project/new',
+    controller:'ProjectCreationController',
+    templateUrl:'templates/create-project.html'
   });
 
   // if none of the above states are matched, use this as the fallback

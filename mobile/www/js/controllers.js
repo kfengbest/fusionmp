@@ -10,7 +10,7 @@ angular.module('starter.controllers', [])
   //});
 
 
-  Chats.all().success(function(data){
+Chats.all().success(function(data){
     $scope.chats = data;
   });
 
@@ -27,4 +27,17 @@ angular.module('starter.controllers', [])
   $scope.settings = {
     enableFriends: true
   };
-});
+})
+
+.controller('ProjectCreationController',['$scope','Chats','$state',function($scope,Chats,$state){
+
+    $scope.project={};
+
+    $scope.create=function(){
+        Todo.create({content:$scope.project.title}).success(function(data){
+            $state.go('tab.chats');
+        });
+    }
+
+
+}]);
