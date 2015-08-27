@@ -9,7 +9,11 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  $scope.chats = Chats.all();
+
+  Chats.all().success(function(data){
+    $scope.chats = data;
+  });
+
   $scope.remove = function(chat) {
     Chats.remove(chat);
   };
