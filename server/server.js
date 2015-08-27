@@ -7,8 +7,7 @@ var userController = require('./users/userController.js');
 
 var app = express();
 
-//mongoose.connect('mongodb://fusion:fusion@ds031883.mongolab.com:31883/fusionmarketplace'); // connect to mongo database named shortly
-mongoose.connect('mongodb://localhost/fusionmarketplace');
+mongoose.connect('mongodb://fusion:fusion@ds031883.mongolab.com:31883/fusionmarketplace'); // connect to mongo database named shortly
 //mongoose.connect('mongodb://localhost/fusionmarketplace');
 
 
