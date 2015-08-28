@@ -49,7 +49,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   .state('createProject',{
     url:'/projects/new',
     controller:'ProjectCreationController',
-    templateUrl:'templates/create-project.html'
+    templateUrl:'templates/project-create.html'
   });
 
   // if none of the above states are matched, use this as the fallback

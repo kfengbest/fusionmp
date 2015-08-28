@@ -36,26 +36,20 @@ Projects.all().success(function(data){
     };
 
     $scope.getPhoto = function() {
-      // Retrieve image file location from specified source
 
       var options = {
           quality: 100,
           destinationType: Camera.DestinationType.FILE_URI,
-          sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-          allowEdit: true,
-          encodingType: Camera.EncodingType.JPEG,
-          popoverOptions: CameraPopoverOptions,
-          saveToPhotoAlbum: false
+          sourceType: Camera.PictureSourceType.PHOTOLIBRARY
       };
-
-      var source = Camera.PictureSource.PHOTOLIBRARY;
       navigator.camera.getPicture(onPhotoURISuccess, onFail, options);
+
     }
 
 
     $scope.create=function(){
         Projects.create($scope.project).success(function(data){
-            $state.go('projects');
+          $state.go('projects',$state.$current.params, {reload: true});
         });
     };
 
