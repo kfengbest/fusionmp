@@ -38,11 +38,11 @@ Projects.all().success(function(data){
     $scope.getPhoto = function() {
 
       var options = {
-          quality: 100,
-          destinationType: Camera.DestinationType.FILE_URI,
+          quality: 50,
+          destinationType: Camera.DestinationType.DATA_URL,
           sourceType: Camera.PictureSourceType.PHOTOLIBRARY
       };
-      navigator.camera.getPicture(onPhotoURISuccess, onFail, options);
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, options);
 
     }
 
@@ -65,7 +65,7 @@ Projects.all().success(function(data){
       // Uncomment to view the image file URI
       console.log(imageURI);
 
-    }
+    };
     
     function onFail(message) {
       //alert('Failed because: ' + message);
