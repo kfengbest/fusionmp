@@ -3,8 +3,8 @@ angular.module('starter.services', [])
 .factory('Projects', ['$http', function($http) {
   // Might use a resource here that returns a JSON array
 
- // var baseUrl = 'http://fusionmarketplace.autodesk.com:8000';
-  var baseUrl = 'http://192.168.31.215:8000';
+  var baseUrl = 'http://fusionmarketplace.autodesk.com:8000';
+ // var baseUrl = 'http://192.168.31.215:8000';
 
   return {
     all: function() {

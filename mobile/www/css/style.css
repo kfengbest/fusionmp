@@ -4,3 +4,7 @@
 	height: 100px;
 	margin: 10px 35%;
 }
+
+.fullimg{
+	max-width: 100%
+}
