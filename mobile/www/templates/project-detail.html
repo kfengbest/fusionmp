@@ -11,10 +11,20 @@
     </div>
 </ion-header-bar>
 
-  <ion-content class="padding">
-  <img ng-src="{{project.imgUrl}}" style="width: 400px; height: 400px">
+<ion-content class="padding">
 
-    <p>
-      {{project.description}}
-    </p>
-  </ion-content>
+  <div class="card">
+    <div class="item item-divider">
+      {{project.title}}
+    </div>
+    <div class="item item-divider">
+      Price: $ {{project.price}}    Deadline: {{project.deadline}}
+    </div>
+    <div class="item item-text-wrap">
+      <img ng-src="{{project.imgUrl}}" style="width: 400px; height: 400px">
+      <p>{{project.description}}</p>
+    </div>
+
+  </div>
+
+</ion-content>

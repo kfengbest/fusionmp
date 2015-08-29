@@ -9,14 +9,17 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-
-Projects.all().success(function(data){
+  
+  console.log('ProjectController');
+  
+  Projects.all().success(function(data){
     $scope.projects = data;
   });
 
   $scope.remove = function(chat) {
     Projects.remove(chat);
   };
+
 })
 
 .controller('ProjectDetailCtrl', function($scope, $stateParams, Projects) {

@@ -18,7 +18,11 @@
             </li>
             <br/>
             <li class="item item-input item-stacked-label">
-                <textarea type="text" placeholder="description..." name="description" rows="10" ng-model="project.description" ></textarea>
+                <textarea type="text" placeholder="deadline..." name="title" rows="1" ng-model="project.deadline" required></textarea>
+            </li>
+            <br/>
+            <li class="item item-input item-stacked-label">
+                <textarea type="text" placeholder="description..." name="description" rows="5" ng-model="project.description" ></textarea>
             </li>
             <ion-button class="button button-block button-positive" ng-click="getPhoto()">
                 Photo
