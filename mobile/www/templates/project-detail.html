@@ -27,8 +27,9 @@
     </div>
 
     <div class="item item-divider">
+      <h3>Designers<h3>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="designer in project.designers" type="item-text-wrap" >
-          <img ng-src="{{designer.fusionfile}}">
+          <img ng-src="{{designer.fusionfilepreview}}">
           <h2>{{designer.designer.username}}</h2>
         </ion-item>
       </ion-list>
