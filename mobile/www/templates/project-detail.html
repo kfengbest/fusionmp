@@ -18,13 +18,20 @@
       {{project.title}}
     </div>
     <div class="item item-divider">
-      Price: $ {{project.price}}    Deadline: {{project.deadline}}
+      Budget: $ {{project.price}}    Deadline: {{project.deadline}}
     </div>
     <div class="item item-text-wrap">
       <img ng-src="{{project.imgUrl}}" style="width: 400px; height: 400px">
       <p>{{project.description}}</p>
     </div>
 
+    <div class="item item-divider">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="designer in project.designers" type="item-text-wrap" >
+          <img ng-src="{{designer.fusionfile}}">
+          <h2>{{designer.designer.username}}</h2>
+        </ion-item>
+      </ion-list>
+    </div>
   </div>
 
 </ion-content>

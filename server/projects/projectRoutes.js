@@ -16,7 +16,8 @@ module.exports = function (app) {
 
   app.route('/:projectId')
     .get(projectsController.read)
-    .post(projectsController.update);
+    .post(projectsController.update)
+    .delete(projectsController.delete);
 
   app.route('/:projectId/accept')
   	.post(projectsController.acceptProject);

@@ -103,7 +103,6 @@ module.exports = {
     };
 
     newProject.owner = user;
-    //newProject.createAt = ;
     var createProject = Q.nbind(Project.create, Project);
     
     createProject(newProject)
@@ -133,6 +132,18 @@ module.exports = {
 
   read: function (req, res, next) {
     res.json(req.project);
+  },
+
+  delete: function(req, res, next) {
+    var project = req.project ;
+
+    project.remove(function(err) {
+      if (err) {
+        next(err);
+      } else {
+        res.json(project);
+      }
+    });
   },
 
   acceptProject: function(req, res, next){

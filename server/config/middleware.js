@@ -10,21 +10,20 @@ module.exports = function (app, express) {
   var userRouter = express.Router();
   var projectRouter = express.Router();
   
-function allowCrossDomain(req, res, next) {
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Origin', "*");
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    res.setHeader('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept");
+  function allowCrossDomain(req, res, next) {
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+      res.setHeader('Access-Control-Allow-Origin', "*");
+      res.setHeader('Access-Control-Allow-Credentials', true);
+      res.setHeader('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept");
 
-    if (req.method === 'OPTIONS') {
-        res.setHeader('Access-Control-Allow-Origin', "*");
-        res.setHeader('Access-Control-Allow-Credentials', true);
-        res.send(200);
-    } else {
-        next();
-    }
-}
-
+      if (req.method === 'OPTIONS') {
+          res.setHeader('Access-Control-Allow-Origin', "*");
+          res.setHeader('Access-Control-Allow-Credentials', true);
+          res.send(200);
+      } else {
+          next();
+      }
+  }
 
   app.use(morgan('dev'));
   //app.use(bodyParser.urlencoded({extended: true}));
