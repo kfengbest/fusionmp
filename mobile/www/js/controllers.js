@@ -30,7 +30,10 @@ angular.module('starter.controllers', [])
 
 .controller('ProjectCreationController',['$scope','Projects','$state',function($scope,Projects,$state){
 
-    $scope.project={};
+    $scope.project={
+      imgUrl: "img/add.png"
+    };
+
 
     $scope.takePhoto = function(){
       // Take picture using device camera and retrieve image as base64-encoded string

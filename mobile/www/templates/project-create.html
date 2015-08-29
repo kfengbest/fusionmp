@@ -24,9 +24,7 @@
             <li class="item item-input item-stacked-label">
                 <textarea type="text" placeholder="description..." name="description" rows="5" ng-model="project.description" ></textarea>
             </li>
-            <ion-button class="button button-block button-positive" ng-click="getPhoto()">
-                Photo
-            </ion-button>
+            <img class="newproject" ng-src="{{project.imgUrl}}" ng-click="getPhoto()">
 
             <ion-button class="button button-block button-positive" ng-click="create()">
                 Add
