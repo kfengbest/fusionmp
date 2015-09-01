@@ -8,7 +8,7 @@
     </div>
 </ion-header-bar>
 
- <ion-content>
+<!--  <ion-content>
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="project in projects" type="item-text-wrap" href="#/projects/{{project._id}}">
         <img ng-src="{{project.imgUrl}}">
@@ -17,7 +17,28 @@
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </ion-list>
-  </ion-content> 
+  </ion-content>  -->
+
+<ion-content>
+<!--     <ion-refresher pulling-text="Pull to refresh" on-refresh="doRefresh()">-->    
+  
+  <ion-list>
+        <ion-item class="list card" ng-repeat="project in projects" href="#/projects/{{project._id}}">
+            
+            <div class="item item-avatar">
+                <img ng-src="{{project.owner.userimage}}">
+                <h2>{{project.title}}</h2>
+                <p>{{project.deadline}}</p>
+            </div>
+            
+            <div class="item item-body">
+                <img class="fullimg" ng-src="{{project.imgUrl}}">
+                <p>{{project.description}}</p>
+            </div>
+            
+        </ion-item>
+  </ion-list>
+</ion-content>
 
 
 <!--   <ion-content>

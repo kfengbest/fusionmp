@@ -20,6 +20,16 @@ angular.module('starter.controllers', [])
     Projects.remove(chat);
   };
 
+  $scope.doRefresh = function(){
+    Projects.all().success(function(data){
+        $scope.projects = data;
+    })
+    .finally(function(){
+        $scope.$broadcast('scroll.refreshComplete');
+    });
+            
+  };
+
 })
 
 .controller('ProjectDetailCtrl', function($scope, $stateParams, Projects) {
@@ -58,6 +68,13 @@ angular.module('starter.controllers', [])
 
 
     $scope.create=function(){
+
+        $scope.project.owner = {
+          username: "Kai Feng",
+          userid: "kfengbest@outlook.com",
+          userimage: "https://s3.amazonaws.com:443/com.autodesk.storage.public.production/oxygen/CU2KQR4MV7NL/profilepictures/x50.jpg?r=635767150685770000"
+        }
+
         Projects.create($scope.project).success(function(data){
           $state.go('projects',$state.$current.params, {reload: true});
         });
