@@ -4,8 +4,9 @@ angular.module('starter.services', [])
   // Might use a resource here that returns a JSON array
 
   var baseUrl = 'http://fusionmarketplace.autodesk.com:8000';
- // var baseUrl = 'http://192.168.31.215:8000';
-
+//  var baseUrl = 'http://10.148.228.23:8000';
+//  var baseUrl = 'http://192.168.31.215:8000';
+  
   return {
     all: function() {
       return $http.get(baseUrl + '/api/projects',{});

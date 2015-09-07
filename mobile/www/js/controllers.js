@@ -83,7 +83,7 @@ angular.module('starter.controllers', [])
     function onPhotoDataSuccess(imageData) {
        if (imageData) {
           $scope.project.imgUrl = "data:image/jpeg;base64," + imageData;
-          console.log($scope.project.imgUrl);
+          console.log("onPhotoDataSuccess");
        }
     };
 

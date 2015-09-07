@@ -9,8 +9,8 @@ var filesMap = {
 
 "BBQGrillBest" : {
   fusionfilepreview: "images/BBQGrillBest.png",
+//  fusionopenlink: "fusion360://userId=smoghe%40autodesk.com&permalinkId=https%3A%2F%2Fmyhub.autodesk360.com%2Fu05%2Fxdio%2Fpermalink%2FXD56a43QTfd62c1cd96839722df360bd3ec6&hubId=u05&documentName=BBQGrillBest"
   fusionopenlink: "fusion360://userId=smoghe%40autodesk.com&permalinkId=https%3A%2F%2Fmyhub.autodesk360.com%2Fu05%2Fxdio%2Fpermalink%2FXD56a43QTfd62c1cd96839722df360bd3ec6&hubId=u05&documentName=BBQGrillBest"
-//  fusionopenlink: "fusion360://userId=fengka%40autodesk.com&permalinkId=https%3A%2F%2Fmyhub.autodesk360.com%2Fu05%2Fxdio%2Fpermalink%2FXD56a43QTfd62c1cd96839722df360bd3ec6&hubId=u05&documentName=BBQGrillBest"
 
 },
 
@@ -96,7 +96,7 @@ module.exports = {
 
   create: function (req, res, next) {
     var newProject = req.body;
-    console.log(newProject);
+    console.log("newProject");
 
     var user = {
       username: req.session.userName || "kaven",
